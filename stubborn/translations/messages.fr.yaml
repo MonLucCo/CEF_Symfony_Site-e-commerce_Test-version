@@ -1,0 +1,28 @@
+# En français, ce fichier contient les messages pour les interfaces, les labels, les titres, les boutons, etc. 
+# qui ne sont pas liés à la validation.
+# Les messages de validation sont dans validators.fr.yaml
+# see https://symfony.com/doc/current/translation.html
+
+register.name.label: "Nom client"
+register.email.label: "Adresse email"
+register.delivery.label: "Adresse de livraison"
+
+register.password.label: "Mot de passe"
+register.password.confirm: "Confirmer le mot de passe"
+
+register.title: "Inscription"
+register.submit: "Créer mon compte"
+
+register.already_account: "Déjà inscrit ?"
+
+login.title: "Connexion"
+login.header: "Veuillez-vous connecter"
+
+login.email.label: "Adresse email"
+login.password.label: "Mot de passe"
+
+login.submit: "Se connecter"
+
+login.logged_in_as: "Vous êtes connecté en tant que %user%"
+login.logout: "Se déconnecter"
+

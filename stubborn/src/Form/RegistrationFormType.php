@@ -18,42 +18,42 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom Client',
+                'label' => 'register.name.label',
                 'constraints' => [
-                    new Assert\NotBlank(message: 'Veuillez saisir votre nom.'),
-                    new Assert\Length(max: 255),
+                    new Assert\NotBlank(message: 'user.name.not_blank'),
+                    new Assert\Length(max: 255, maxMessage: 'user.name.max_length'),
                 ],
             ])
 
             ->add('email', EmailType::class, [
-                'label' => 'Adresse email',
+                'label' => 'register.email.label',
                 'attr' => ['autocomplete' => 'email'],
                 'constraints' => [
-                    new Assert\NotBlank(message: 'Veuillez saisir un email.'),
-                    new Assert\Email(message: 'Email invalide.'),
-                    new Assert\Length(max: 180, maxMessage: 'L\'email ne doit pas dépasser {{ limit }} caractères.'),
+                    new Assert\NotBlank(message: 'user.email.not_blank'),
+                    new Assert\Email(message: 'user.email.invalid'),
+                    new Assert\Length(max: 180, maxMessage: 'user.email.max_length'),
                 ],
             ])
 
             ->add('deliveryAddress', TextType::class, [
-                'label' => 'Adresse de livraison',
+                'label' => 'register.delivery.label',
                 'constraints' => [
-                    new Assert\NotBlank(message: 'Veuillez saisir votre adresse de livraison.'),
-                    new Assert\Length(max: 255),
+                    new Assert\NotBlank(message: 'user.delivery.not_blank'),
+                    new Assert\Length(max: 255, maxMessage: 'user.delivery.max_length'),
                 ],
             ])
 
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
-                'invalid_message' => 'Les mots de passe doivent correspondre.',
+                'first_options' => ['label' => 'register.password.label'],
+                'second_options' => ['label' => 'register.password.confirm'],
+                'invalid_message' => 'user.password.mismatch',
                 'constraints' => [
-                    new Assert\NotBlank(message: 'Veuillez saisir un mot de passe.'),
+                    new Assert\NotBlank(message: 'user.password.not_blank'),
                     new Assert\Length(
                         min: 6,
-                        minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                        minMessage: 'user.password.min_length',
                         max: 4096,
                     ),
                 ],

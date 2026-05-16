@@ -8,6 +8,12 @@ framework:
     #esi: true
     #fragments: true
 
+    # translator configuration
+    translator:
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks:
+            - fr
+
 when@test:
     framework:
         test: true

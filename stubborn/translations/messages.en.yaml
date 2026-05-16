@@ -1,0 +1,27 @@
+# In English, this file contains messages for the interfaces, labels, titles, buttons, etc. 
+# that are not related to validation.
+# Validation messages go in validators.en.yaml
+# see https://symfony.com/doc/current/translation.html
+
+register.name.label: "Customer name"
+register.email.label: "Email address"
+register.delivery.label: "Delivery address"
+
+register.password.label: "Password"
+register.password.confirm: "Confirm password"
+
+register.title: "Sign up"
+register.submit: "Create my account"
+
+register.already_account: "Already have an account?"
+
+login.title: "Login"
+login.header: "Please sign in"
+
+login.email.label: "Email address"
+login.password.label: "Password"
+
+login.submit: "Sign in"
+
+login.logged_in_as: "You are logged in as %user%"
+login.logout: "Logout"
