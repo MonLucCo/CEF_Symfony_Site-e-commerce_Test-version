@@ -18,7 +18,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'register.name.label',
+                'label' => 'register.form.name.label',
                 'constraints' => [
                     new Assert\NotBlank(message: 'user.name.not_blank'),
                     new Assert\Length(max: 255, maxMessage: 'user.name.max_length'),
@@ -26,7 +26,7 @@ class RegistrationFormType extends AbstractType
             ])
 
             ->add('email', EmailType::class, [
-                'label' => 'register.email.label',
+                'label' => 'register.form.email.label',
                 'attr' => ['autocomplete' => 'email'],
                 'constraints' => [
                     new Assert\NotBlank(message: 'user.email.not_blank'),
@@ -36,7 +36,7 @@ class RegistrationFormType extends AbstractType
             ])
 
             ->add('deliveryAddress', TextType::class, [
-                'label' => 'register.delivery.label',
+                'label' => 'register.form.delivery.label',
                 'constraints' => [
                     new Assert\NotBlank(message: 'user.delivery.not_blank'),
                     new Assert\Length(max: 255, maxMessage: 'user.delivery.max_length'),
@@ -46,8 +46,8 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'first_options' => ['label' => 'register.password.label'],
-                'second_options' => ['label' => 'register.password.confirm'],
+                'first_options' => ['label' => 'register.form.password.label'],
+                'second_options' => ['label' => 'register.form.password.confirm'],
                 'invalid_message' => 'user.password.mismatch',
                 'constraints' => [
                     new Assert\NotBlank(message: 'user.password.not_blank'),

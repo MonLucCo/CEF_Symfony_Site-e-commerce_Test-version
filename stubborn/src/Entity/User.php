@@ -32,6 +32,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $deliveryAddress = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified = false;
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
