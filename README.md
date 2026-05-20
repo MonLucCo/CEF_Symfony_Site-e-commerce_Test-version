@@ -3,7 +3,7 @@
 Etablissement d'un site de e-commerce (avec système de réservation / d'achat en ligne) avec Symfony selon les spécifications du CEF.
 
 ![Licence MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Milestone Phase 1](https://img.shields.io/badge/Phase%201-Organisation-green)
+![Milestone Phase 2](https://img.shields.io/badge/Phase%202-Développement-green)
 ![Issues ouvertes](https://img.shields.io/github/issues/MonLucCo/CEF_Symfony_Site-e-commerce_Test-version)
 ![Statut du dépôt](https://img.shields.io/badge/Status%20dépôt-en%20développement-orange)
 
