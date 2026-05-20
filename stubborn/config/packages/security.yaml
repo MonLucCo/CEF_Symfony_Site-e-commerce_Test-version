@@ -23,14 +23,13 @@ security:
             lazy: true
             provider: users_in_database             # Le provider utilisé pour l'authentification
 
-            entry_point: App\Security\LoginFormAuthenticator # Point d'entrée personnalisé pour les utilisateurs non authentifiés
-            # entry_point: form_login                 # Point d'entrée personnalisé pour les utilisateurs non authentifiés
+            entry_point: form_login                 # Point d'entrée personnalisé pour les utilisateurs non authentifiés
 
             form_login:
                 login_path: app_login               # Route du formulaire de connexion
                 check_path: app_login               # Route de soumission du formulaire de connexion
                 enable_csrf: true                   # Protection CSRF activée pour le formulaire de connexion
-                default_target_path: app_dashboard  # Route de redirection après une connexion réussie
+                default_target_path: app_home       # Route de redirection après une connexion réussie
 
             logout:
                 path: app_logout                    # Route de déconnexion
