@@ -46,8 +46,21 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
+
+        # --- ROUTES PUBLIQUES ---
+        - { path: ^/$, roles: PUBLIC_ACCESS }
+        - { path: ^/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/register$, roles: PUBLIC_ACCESS }
+        - { path: ^/verify/email, roles: PUBLIC_ACCESS }
+
+        # --- ROUTES UTILISATEUR CONNECTÉ ---
+        - { path: ^/register/resend$, roles: ROLE_USER }
+
+        # --- ROUTES ADMIN ---
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+
+        # --- ROUTES TECHNIQUES ---
+        - { path: ^/logout$, roles: ROLE_USER }        
 
 when@test:
     security:
