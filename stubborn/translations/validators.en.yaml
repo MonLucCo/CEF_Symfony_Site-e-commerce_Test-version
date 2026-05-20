@@ -1,0 +1,27 @@
+# In English, this file contains messages related to validation.
+# Messages not related to validation go in messages.en.yaml
+# see https://symfony.com/doc/current/translation.html
+
+# ===========================
+# VALIDATION : User
+# ===========================
+user:
+  email:
+    unique: "This email address is already in use."
+    not_blank: "Please enter an email address."
+    invalid: "Invalid email address."
+    max_length: "The email must not exceed {{ limit }} characters."
+
+  name:
+    not_blank: "Please enter your name."
+    max_length: "The name must not exceed {{ limit }} characters."
+
+  delivery:
+    not_blank: "Please enter your delivery address."
+    max_length: "The delivery address must not exceed {{ limit }} characters."
+
+  password:
+    not_blank: "Please enter a password."
+    min_length: "The password must contain at least {{ limit }} characters."
+    mismatch: "The passwords must match."
+    

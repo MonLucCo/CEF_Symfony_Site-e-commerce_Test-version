@@ -1,0 +1,26 @@
+# En français, ce fichier contient les messages liés à la validation.
+# Les messages non liés à la validation sont dans messages.fr.yaml
+# see https://symfony.com/doc/current/translation.html
+
+# ===========================
+# VALIDATION : User
+# ===========================
+user:
+  email:
+    unique: "Cette adresse e-mail est déjà utilisée."
+    not_blank: "Veuillez saisir un email."
+    invalid: "Adresse email invalide."
+    max_length: "L'email ne doit pas dépasser {{ limit }} caractères."
+
+  name:
+    not_blank: "Veuillez saisir votre nom."
+    max_length: "Le nom ne doit pas dépasser {{ limit }} caractères."
+
+  delivery:
+    not_blank: "Veuillez saisir votre adresse de livraison."
+    max_length: "L'adresse de livraison ne doit pas dépasser {{ limit }} caractères."
+
+  password:
+    not_blank: "Veuillez saisir un mot de passe."
+    min_length: "Le mot de passe doit contenir au moins {{ limit }} caractères."
+    mismatch: "Les mots de passe doivent correspondre."
