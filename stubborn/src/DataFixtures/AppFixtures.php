@@ -29,16 +29,27 @@ class AppFixtures extends Fixture
         $admin->setName('Admin');
         $admin->setEmail('admin@example.com');
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setIsVerified(false);       // Un Admin ne doit jamais être vérifié par email. Il ne pourra pas accéder aux achats.
         $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin123'));
         $manager->persist($admin);
 
         // Client
         $client = new User();
-        $client->setName('Client Test');
-        $client->setEmail('client@example.com');
+        $client->setName('Client Test-1');
+        $client->setEmail('client1@example.com');
         $client->setRoles(['ROLE_USER']);
-        $client->setPassword($this->passwordHasher->hashPassword($client, 'client123'));
-        $client->setDeliveryAddress('12 rue des Tests, 75000 Paris');
+        $client->setIsVerified(true);
+        $client->setPassword($this->passwordHasher->hashPassword($client, 'client1'));
+        $client->setDeliveryAddress('1 rue des Tests, 75000 Paris');
+        $manager->persist($client);
+
+        $client = new User();
+        $client->setName('Client Test-2');
+        $client->setEmail('client2@example.com');
+        $client->setRoles(['ROLE_USER']);
+        $client->setIsVerified(false);
+        $client->setPassword($this->passwordHasher->hashPassword($client, 'client2'));
+        $client->setDeliveryAddress('2 rue des Tests, 75000 Paris');
         $manager->persist($client);
 
         // --- PRODUCTS ---

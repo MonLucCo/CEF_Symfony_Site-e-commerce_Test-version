@@ -1,0 +1,65 @@
+# In English, this file contains messages for the interfaces, labels, titles, buttons, etc. 
+# that are not related to validation.
+# Validation messages go in validators.en.yaml
+# see https://symfony.com/doc/current/translation.html
+
+# ===========================
+# SECTION : Registration
+# ===========================
+register:
+  form:
+    name:
+      label: "Customer name"
+    email:
+      label: "Email address"
+    delivery:
+      label: "Delivery address"
+    password:
+      label: "Password"
+      confirm: "Confirm password"
+
+  title: "Sign up"
+  submit: "Create my account"
+
+  already_account: "Already have an account?"
+
+# Email verification messages
+  email:
+    subject: "Confirm your email address"
+    sent: "A confirmation email has been sent to you."
+    resent: "A new confirmation email has been sent to you."
+    error: "An error occurred while sending the confirmation email."
+
+# ===========================
+# SECTION : Login
+# ===========================
+login:
+  title: "Login"
+  header: "Please sign in"
+
+  email:
+    label: "Email address"
+  password:
+    label: "Password"
+
+  submit: "Sign in"
+
+  logged_in_as: "You are logged in as %user%"
+  logout: "Logout"
+
+# ===========================
+# SECTION : Email verification
+# ===========================
+verify:
+  email:
+    title: "Activate your account"
+    intro: "Thank you for registering. Please confirm your email address."
+    button: "Activate my account"
+    expiration: "This link will expire at %expires%."
+
+  already_verified: "Your email address is already verified."
+  success: "Your email address has been successfully verified."
+  error: "The verification link is invalid or has expired. You can request a new verification email from your account."
+  error_login_required: "Your link is invalid. Please log in to request a new link."
+  error_register_required: "This link is not valid. Please create an account."
+  

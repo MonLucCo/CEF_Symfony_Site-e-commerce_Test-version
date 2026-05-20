@@ -1,0 +1,65 @@
+# En français, ce fichier contient les messages pour les interfaces, les labels, les titres, les boutons, etc. 
+# qui ne sont pas liés à la validation.
+# Les messages de validation sont dans validators.fr.yaml
+# see https://symfony.com/doc/current/translation.html
+
+# ===========================
+# SECTION : Registration
+# ===========================
+register:
+  form:
+    name:
+      label: "Nom client"
+    email:
+      label: "Adresse email"
+    delivery:
+      label: "Adresse de livraison"
+    password:
+      label: "Mot de passe"
+      confirm: "Confirmer le mot de passe"
+
+  title: "Inscription"
+  submit: "Créer mon compte"
+
+  already_account: "Déjà inscrit ?"
+
+# Emails envoyés pendant l'inscription
+  email:
+    subject: "Confirmez votre adresse email"
+    sent: "Un email de confirmation vous a été envoyé."
+    resent: "Un nouvel email de confirmation vous a été envoyé."
+    error: "Une erreur est survenue lors de l'envoi de l'email de confirmation."
+
+# ===========================
+# SECTION : Login
+# ===========================
+login:
+  title: "Connexion"
+  header: "Veuillez-vous connecter"
+
+  email:
+    label: "Adresse email"
+  password:
+    label: "Mot de passe"
+
+  submit: "Se connecter"
+
+  logged_in_as: "Vous êtes connecté en tant que %user%"
+  logout: "Se déconnecter"
+
+# ===========================
+# SECTION : Email verification
+# ===========================
+verify:
+  email:
+    title: "Activation de votre compte"
+    intro: "Merci pour votre inscription. Veuillez confirmer votre adresse email."
+    button: "Activer mon compte"
+    expiration: "Ce lien expirera à %expires%."
+
+  already_verified: "Votre adresse email est déjà vérifiée."
+  success: "Votre adresse email a été vérifiée avec succès."
+  error: "Le lien de vérification est invalide ou a expiré. Vous pouvez demander un nouvel email de vérification depuis votre compte."
+  error_login_required: "Votre lien est invalide. Veuillez vous connecter pour demander un nouveau lien."
+  error_register_required: "Ce lien n'est pas valide. Veuillez créer un compte."
+  
