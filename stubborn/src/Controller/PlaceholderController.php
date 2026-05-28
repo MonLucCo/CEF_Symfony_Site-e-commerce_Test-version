@@ -16,12 +16,6 @@ class PlaceholderController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    #[Route('/products', name: 'app_products')]
-    public function products(): Response
-    {
-        return $this->placeholder('Page Produits');
-    }
-
     #[Route('/cart', name: 'app_cart')]
     public function cart(): Response
     {
