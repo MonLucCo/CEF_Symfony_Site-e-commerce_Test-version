@@ -10,6 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
+    /**
+     * Constante pour les tailles disponibles, utilisée pour la validation et l'affichage
+     */
+    public const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

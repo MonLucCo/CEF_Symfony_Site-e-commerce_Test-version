@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -22,9 +24,15 @@ class PlaceholderController extends AbstractController
         return $this->placeholder('Page Panier');
     }
 
-    #[Route('/product/{id}', name: 'app_product_show')]
-    public function show(int $id): Response
+    #[Route('/cart/add/{id}', name: 'app_cart_add')]
+    public function addToCart(int $id, Request $request): Response
     {
-        return $this->placeholder("Page produit $id");
+        $size = $request->query->get('size');
+
+        // Validation défensive : la taille doit être une valeur autorisée
+        if (!in_array($size, Product::SIZES, true)) {
+            throw $this->createNotFoundException('Taille invalide.');
+        }
+        return $this->placeholder("Ajout du produit $id au panier (Taille: $size)");
     }
 }
