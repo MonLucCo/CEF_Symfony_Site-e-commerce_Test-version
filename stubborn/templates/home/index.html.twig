@@ -1,20 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil — Stubborn
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<section class="home-hero">
+		<h1>Bienvenue chez Stubborn</h1>
+		<p>Don't compromise on your look.</p>
+		<p>Découvrez nos sweat-shirts de qualité, conçus pour durer.</p>
+	</section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/lucpe/projets/CEF_Symfony_Site-e-commerce_Test-version/stubborn/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/home/lucpe/projets/CEF_Symfony_Site-e-commerce_Test-version/stubborn/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+	<section class="featured-products">
+		<h2>Produits mis en avant</h2>
+
+		<div class="featured-grid">
+			{% for product in featured %}
+				<div class="product-card">
+					<img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
+
+					<h3>{{ product.name }}</h3>
+					<p>{{ product.price }}
+						€</p>
+
+					{% if app.user %}
+						<a class="btn" href="{{ path('app_product_show', {id: product.id}) }}">
+							Voir >
+						</a>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+
 {% endblock %}

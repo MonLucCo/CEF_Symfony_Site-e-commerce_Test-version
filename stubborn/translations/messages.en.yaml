@@ -1,4 +1,4 @@
-# In English, this file contains messages for the interfaces, labels, titles, buttons, etc. 
+# In English, this file contains messages for the interfaces, labels, titles, buttons, etc.
 # that are not related to validation.
 # Validation messages go in validators.en.yaml
 # see https://symfony.com/doc/current/translation.html
@@ -23,7 +23,7 @@ register:
 
   already_account: "Already have an account?"
 
-# Email verification messages
+  # Email verification messages
   email:
     subject: "Confirm your email address"
     sent: "A confirmation email has been sent to you."
@@ -62,4 +62,21 @@ verify:
   error: "The verification link is invalid or has expired. You can request a new verification email from your account."
   error_login_required: "Your link is invalid. Please log in to request a new link."
   error_register_required: "This link is not valid. Please create an account."
-  
+
+# ===========================
+# SECTION : Error pages
+# ===========================
+error:
+  title: "An error has occurred"
+  back_home: "Back to home"
+  generic:
+    message: "An error has occurred while processing your request."
+  403:
+    title: "Access denied"
+    message: "You do not have permission to access this resource."
+  404:
+    title: "Page not found"
+    message: "The page you are looking for does not exist or is no longer available."
+  500:
+    title: "Internal server error"
+    message: "An unexpected error has occurred. Please try again later."

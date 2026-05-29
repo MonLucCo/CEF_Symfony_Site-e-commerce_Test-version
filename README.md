@@ -14,8 +14,8 @@ Etablissement d'un site de e-commerce (avec système de réservation / d'achat e
 
 ## 🛍️ Stubborn — Boutique en ligne (Symfony)
 
-![Symfony](https://img.shields.io/badge/Symfony-6.4-black)
-![PHP](https://img.shields.io/badge/PHP-8.2-blue)
+![Symfony](https://img.shields.io/badge/Symfony-8.0-black)
+![PHP](https://img.shields.io/badge/PHP-8.4-blue)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
 ![Stripe](https://img.shields.io/badge/Stripe-Test_Mode-purple)
 ![Status](https://img.shields.io/badge/Project-Study_Assignment-green)
@@ -55,11 +55,11 @@ STRIPE_PUBLIC_KEY=pk_test_xxx
 
 ## 📦 Fonctionnalités principales
 
-- [ ] Page d’accueil avec produits mis en avant  
-- [ ] Inscription + email d’activation  
-- [ ] Connexion / déconnexion  
-- [ ] Liste des produits + filtres de prix  
-- [ ] Fiche produit avec choix de taille  
+- [x] Page d’accueil avec produits mis en avant  
+- [x] Inscription + email d’activation  
+- [x] Connexion / déconnexion  
+- [x] Liste des produits + filtres de prix  
+- [x] Fiche produit avec choix de taille  
 - [ ] Panier en session  
 - [ ] Paiement Stripe (Checkout)  
 - [ ] Back‑office (CRUD produits)  

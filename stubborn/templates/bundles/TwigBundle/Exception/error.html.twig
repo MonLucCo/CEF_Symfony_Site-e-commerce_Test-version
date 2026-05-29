@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'error.title'|trans }}
+{% endblock %}
+
+{% block body %}
+	<section class="error-page">
+		<h1>{{ 'error.title'|trans }}</h1>
+		<p>{{ 'error.generic.message'|trans }}</p>
+
+		<p>
+			<a class="btn" href="{{ path('app_home') }}">{{ 'error.back_home'|trans }}</a>
+		</p>
+	</section>
+{% endblock %}
