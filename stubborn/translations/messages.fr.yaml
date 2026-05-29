@@ -1,4 +1,4 @@
-# En français, ce fichier contient les messages pour les interfaces, les labels, les titres, les boutons, etc. 
+# En français, ce fichier contient les messages pour les interfaces, les labels, les titres, les boutons, etc.
 # qui ne sont pas liés à la validation.
 # Les messages de validation sont dans validators.fr.yaml
 # see https://symfony.com/doc/current/translation.html
@@ -23,7 +23,7 @@ register:
 
   already_account: "Déjà inscrit ?"
 
-# Emails envoyés pendant l'inscription
+  # Emails envoyés pendant l'inscription
   email:
     subject: "Confirmez votre adresse email"
     sent: "Un email de confirmation vous a été envoyé."
@@ -62,4 +62,21 @@ verify:
   error: "Le lien de vérification est invalide ou a expiré. Vous pouvez demander un nouvel email de vérification depuis votre compte."
   error_login_required: "Votre lien est invalide. Veuillez vous connecter pour demander un nouveau lien."
   error_register_required: "Ce lien n'est pas valide. Veuillez créer un compte."
-  
+
+# ===========================
+# SECTION : Error pages
+# ===========================
+error:
+  title: "Une erreur est survenue"
+  back_home: "Retour à l'accueil"
+  generic:
+    message: "Une erreur est survenue lors du traitement de votre demande."
+  403:
+    title: "Accès refusé"
+    message: "Vous n'avez pas la permission d'accéder à cette ressource."
+  404:
+    title: "Page introuvable"
+    message: "La page que vous recherchez n'existe pas ou n'est plus disponible."
+  500:
+    title: "Erreur interne du serveur"
+    message: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."

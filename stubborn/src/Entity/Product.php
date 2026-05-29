@@ -5,10 +5,16 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
+    /**
+     * Constante pour les tailles disponibles, utilisée pour la validation et l'affichage
+     */
+    public const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -17,6 +23,7 @@ class Product
     #[ORM\Column(length: 255)]
     private string $name;
 
+    #[Assert\PositiveOrZero]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private string $price;
 
@@ -26,18 +33,23 @@ class Product
     #[ORM\Column]
     private bool $isFeatured = false;
 
+    #[Assert\PositiveOrZero]
     #[ORM\Column]
     private int $stockXS = 0;
 
+    #[Assert\PositiveOrZero]
     #[ORM\Column]
     private int $stockS = 0;
 
+    #[Assert\PositiveOrZero]
     #[ORM\Column]
     private int $stockM = 0;
 
+    #[Assert\PositiveOrZero]
     #[ORM\Column]
     private int $stockL = 0;
 
+    #[Assert\PositiveOrZero]
     #[ORM\Column]
     private int $stockXL = 0;
 
