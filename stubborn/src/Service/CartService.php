@@ -30,6 +30,14 @@ class CartService
     public function add(int $productId, string $size): void
     {
         $cart = $this->getCart();
+        $product = $this->productRepository->find($productId);
+
+        if (!$product) {
+            return;
+        }
+
+        // Stock max pour cette taille
+        $maxStock = $product->getStockForSize($size);
 
         // Si le produit n'existe pas encore dans le panier
         if (!isset($cart[$productId])) {
@@ -41,8 +49,32 @@ class CartService
             $cart[$productId][$size] = ['quantity' => 0];
         }
 
-        // Incrémenter la quantité
-        $cart[$productId][$size]['quantity']++;
+        // Quantité actuelle
+        $currentQty = $cart[$productId][$size]['quantity'];
+
+        // Vérification du stock
+        if ($currentQty < $maxStock) {
+            $cart[$productId][$size]['quantity']++;
+        }
+
+        $this->saveCart($cart);
+    }
+
+    public function decrease(int $id, string $size): void
+    {
+        $cart =  $this->getCart();
+
+        if (!isset($cart[$id][$size])) {
+            return;
+        }
+
+        // Diminuer la quantité
+        if ($cart[$id][$size]['quantity'] > 0) {
+            $cart[$id][$size]['quantity']--;
+        }
+
+        // On NE supprime PAS la ligne ici
+        // min = 0, c’est tout
 
         $this->saveCart($cart);
     }

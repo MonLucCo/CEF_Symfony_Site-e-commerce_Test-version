@@ -47,6 +47,14 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart_index', [], 303);   // 303 : redirection après POST (PRG pattern)
     }
 
+    #[Route('/decrease/{id}/{size}', name: 'decrease', methods: ['POST'])]
+    public function decrease(int $id, string $size, CartService $cartService): Response
+    {
+        $cartService->decrease($id, $size);
+
+        return $this->redirectToRoute('cart_index', [], 303);   // 303 : redirection après POST (PRG pattern)
+    }
+
     #[Route('/remove/{id}/{size}', name: 'remove', methods: ['POST'])]
     public function remove(int $id, string $size, CartService $cartService): Response
     {

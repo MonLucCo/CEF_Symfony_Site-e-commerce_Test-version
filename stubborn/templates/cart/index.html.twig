@@ -38,7 +38,19 @@
 						<td>{{ item.size }}</td>
 						<td>{{ item.price }}
 							€</td>
-						<td>{{ item.quantity }}</td>
+						<td>
+							<div class="cart-qty">
+								<form action="{{ path('cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
+									<button class="btn btn-sm btn-outline-secondary">−</button>
+								</form>
+
+								<span class="mx-2">{{ item.quantity }}</span>
+
+								<form action="{{ path('cart_add', {id: item.product.id, size: item.size}) }}" method="post">
+									<button class="btn btn-sm btn-outline-secondary">+</button>
+								</form>
+							</div>
+						</td>
 						<td>{{ item.total }}
 							€</td>
 						<td>
