@@ -80,3 +80,30 @@ error:
   500:
     title: "Erreur interne du serveur"
     message: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+
+# ===========================
+# SECTION : Cart management
+# ===========================
+cart:
+  title: "Votre panier"
+  empty: "Votre panier est vide."
+  product:
+    name: "Produit"
+    price: "Prix unitaire"
+    size: "Taille"
+    quantity: "Quantité"
+    total: "Total"
+  total: "Total du panier"
+  checkout: "Passer à la caisse"
+  flash:
+    added: "Produit ajouté au panier."
+    removed: "Produit retiré du panier."
+    cleared: "Panier vidé."
+  actions:
+    name: "Actions"
+    remove: "Retirer"
+    continue: "Continuer mes achats"
+    clear: "Vider le panier"
+  status:
+    in_stock: "En stock"
+    out_of_stock: "Rupture de stock"

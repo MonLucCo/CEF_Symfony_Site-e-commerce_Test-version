@@ -31,25 +31,35 @@ class CartService
     {
         $cart = $this->getCart();
 
-        // Si le produit existe déjà avec la même taille → quantité++
-        if (isset($cart[$productId]) && $cart[$productId]['size'] === $size) {
-            $cart[$productId]['quantity']++;
-        } else {
-            // Sinon → nouvelle entrée
-            $cart[$productId] = [
-                'size' => $size,
-                'quantity' => 1
-            ];
+        // Si le produit n'existe pas encore dans le panier
+        if (!isset($cart[$productId])) {
+            $cart[$productId] = [];
         }
+
+        // Si la taille n'existe pas encore
+        if (!isset($cart[$productId][$size])) {
+            $cart[$productId][$size] = ['quantity' => 0];
+        }
+
+        // Incrémenter la quantité
+        $cart[$productId][$size]['quantity']++;
 
         $this->saveCart($cart);
     }
 
-    public function remove(int $productId): void
+    public function remove(int $productId, string $size): void
     {
         $cart = $this->getCart();
 
-        if (isset($cart[$productId])) {
+        // Si l'entrée n'existe pas, on ne touche à rien
+        if (!isset($cart[$productId][$size])) {
+            return;
+        }
+
+        unset($cart[$productId][$size]);
+
+        // Si plus aucune taille pour ce produit → supprimer le produit
+        if (empty($cart[$productId])) {
             unset($cart[$productId]);
         }
 
@@ -66,29 +76,43 @@ class CartService
         $cart = $this->getCart();
         $detailedCart = [];
 
-        foreach ($cart as $productId => $item) {
+        dump('getDetailedCart : ' . json_encode($cart)); // Debug : pour vérifier la structure du panier
+
+        foreach ($cart as $productId => $sizes) {
             $product = $this->productRepository->find($productId);
 
+            dump('Boucle getDetailedCart : ' . $productId .
+                ' - ' . json_encode($sizes) .
+                ' # {' . $product->getId() . ' - ' . $product->getName() . '}'); // Debug : pour vérifier le produit trouvé
+
             if (!$product) {
-                continue; // produit supprimé en base
+                continue;
             }
 
-            $detailedCart[] = [
-                'product' => $product,
-                'size' => $item['size'],
-                'quantity' => $item['quantity'],
-                'total' => $product->getPrice() * $item['quantity']
-            ];
+            foreach ($sizes as $size => $data) {
+                $quantity = $data['quantity'];
+
+                $detailedCart[] = [
+                    'product' => $product,
+                    'size' => $size,
+                    'price' => $product->getPrice(),
+                    'quantity' => $quantity,
+                    'total' => $product->getPrice() * $quantity,
+                ];
+
+                dump('Item ajouté au detailedCart : ' . json_encode(end($detailedCart))); // Debug : pour vérifier les items ajoutés
+
+            }
         }
 
         return $detailedCart;
     }
 
-    public function getTotal(): float
+    public function getTotal(array $items): float
     {
         $total = 0;
 
-        foreach ($this->getDetailedCart() as $item) {
+        foreach ($items as $item) {
             $total += $item['total'];
         }
 

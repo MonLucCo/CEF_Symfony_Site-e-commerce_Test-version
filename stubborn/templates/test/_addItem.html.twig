@@ -1,0 +1,38 @@
+{# Debug : templates/test/_addItem.html.twig #}
+
+<fieldset class="mt-4 border rounded p-3">
+	<legend class="w-auto px-2">Formulaire de test (manuel) pour ajouter un article au panier</legend>
+
+	{# Ce formulaire est un outil de test manuel pour simuler l'ajout d'un article au panier. #}
+	{# Il utilise JavaScript pour modifier dynamiquement l'URL d'action du formulaire en fonction des sélections de l'utilisateur. #}
+	{# L'URL d'action par défaut est définie avec des valeurs fictives (id: 0, size: 'X') qui seront remplacées lors de la soumission du formulaire. #}
+
+		<form action="{{ path('cart_add', {id: 0, size: 'X'}) }}" method="post" onsubmit="
+											        this.action = this.action
+											            .replace('/0/', '/' + document.getElementById('test_product').value + '/')
+											            .replace('/X', '/' + document.getElementById('test_size').value);
+											      " class="border p-3 rounded"> <div class="mb-3">
+			<label for="test_product" class="form-label">Produit</label>
+			<select id="test_product" class="form-select" required>
+				{% for product in testData.products %}
+					<option value="{{ product.id }}">
+						{{ product.id }}
+						—
+						{{ product.name }}
+					</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="mb-3">
+			<label for="test_size" class="form-label">Taille</label>
+			<select id="test_size" class="form-select" required>
+				{% for size in testData.sizes %}
+					<option value="{{ size }}">{{ size }}</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<button class="btn btn-primary">Ajouter (POST)</button>
+	</form>
+</fieldset>

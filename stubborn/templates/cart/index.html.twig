@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'cart.title'|trans }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ 'cart.title'|trans }}</h1>
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{ message }}</div>
+	{% endfor %}
+	{% for message in app.flashes('info') %}
+		<div class="alert alert-info">{{ message }}</div>
+	{% endfor %}
+	{% for message in app.flashes('warning') %}
+		<div class="alert alert-warning">{{ message }}</div>
+	{% endfor %}
+
+	{% if items is empty %}
+		<p class="text-center">{{ 'cart.empty'|trans }}</p>
+	{% else %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{{ 'cart.product.name'|trans }}</th>
+					<th>{{ 'cart.product.size'|trans }}</th>
+					<th>{{ 'cart.product.price'|trans }}</th>
+					<th>{{ 'cart.product.quantity'|trans }}</th>
+					<th>{{ 'cart.product.total'|trans }}</th>
+					<th>{{ 'cart.actions.name'|trans }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in items %}
+					<tr>
+						<td>{{ item.product.name }}</td>
+						<td>{{ item.size }}</td>
+						<td>{{ item.price }}
+							€</td>
+						<td>{{ item.quantity }}</td>
+						<td>{{ item.total }}
+							€</td>
+						<td>
+							<form action="{{ path('cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
+								<button class="btn btn-danger btn-sm">
+									{{ 'cart.actions.remove'|trans }}
+								</button>
+							</form>
+
+							{# Debug : Pour afficher le chemin de l'URL de suppression #}
+							<small class="text-muted">
+								{{ path('cart_remove', {id: item.product.id, size: item.size}) }}
+							</small>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<p class="text-end">
+			<strong>{{ 'cart.total'|trans }}
+				:
+				{{ total }}
+				€</strong>
+		</p>
+
+	{% endif %}
+
+	<div class="cart-actions">
+
+		<a href="{{ path('app_products') }}" class="btn btn-secondary">
+			{{ 'cart.actions.continue'|trans }}
+		</a>
+
+		{% if items is not empty %}
+			<form action="{{ path('cart_clear') }}" method="post">
+				<button class="btn btn-warning">
+					{{ 'cart.actions.clear'|trans }}
+				</button>
+			</form>
+		{% endif %}
+
+	</div>
+
+	{# Debug : Formulaire de test manuel pour ajouter un article #}
+	{% include 'test/_addItem.html.twig' %}
+
+{% endblock %}
