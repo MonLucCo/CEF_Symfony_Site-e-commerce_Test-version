@@ -2,32 +2,32 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="{{ path('app_home') }}">Accueil</a>
+				<a href="{{ path('app_home') }}">{{ 'menu.home'|trans }}</a>
 			</li>
 
 			{% if app.user %}
 				<li>
-					<a href="{{ path('app_products') }}">Boutique</a>
+					<a href="{{ path('app_products') }}">{{ 'menu.products'|trans }}</a>
 				</li>
 				<li>
-					<a href="{{ path('app_cart') }}">Panier</a>
+					<a href="{{ path('app_cart_index') }}">{{ 'menu.cart'|trans }}</a>
 				</li>
 
 				{% if 'ROLE_ADMIN' in app.user.roles %}
 					<li>
-						<a href="{{ path('app_admin') }}">Back-office</a>
+						<a href="{{ path('app_admin') }}">{{ 'menu.admin'|trans }}</a>
 					</li>
 				{% endif %}
 
 				<li>
-					<a href="{{ path('app_logout') }}">Se déconnecter</a>
+					<a href="{{ path('app_logout') }}">{{ 'menu.logout'|trans }}</a>
 				</li>
 			{% else %}
 				<li>
-					<a href="{{ path('app_register') }}">S'inscrire</a>
+					<a href="{{ path('app_register') }}">{{ 'menu.register'|trans }}</a>
 				</li>
 				<li>
-					<a href="{{ path('app_login') }}">Se connecter</a>
+					<a href="{{ path('app_login') }}">{{ 'menu.login'|trans }}</a>
 				</li>
 			{% endif %}
 		</ul>

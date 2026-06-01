@@ -1,24 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nos produits
+{% block title %}
+	{{ 'products.title'|trans }}
 {% endblock %}
 
 {% block body %}
-	<h1>Nos produits</h1>
+	<h1>{{ 'products.title'|trans }}</h1>
 
 	<form method="get" class="filter-form">
-		<label for="price">Filtrer par prix :</label>
+		<label for="price">{{ 'products.filter.label'|trans }}</label>
 		<select name="price" id="price" onchange="this.form.submit()">
-			<option value="">Tous les prix</option>
-			<option value="10-29" {{ filter == '10-29' ? 'selected' }}>10 à 29 €</option>
-			<option value="29-35" {{ filter == '29-35' ? 'selected' }}>29 à 35 €</option>
-			<option value="35-50" {{ filter == '35-50' ? 'selected' }}>35 à 50 €</option>
+			<option value="">{{ 'products.filter.all'|trans }}</option>
+			<option value="10-29" {{ filter == '10-29' ? 'selected' }}>{{ 'products.filter.price_10_29'|trans }}</option>
+			<option value="29-35" {{ filter == '29-35' ? 'selected' }}>{{ 'products.filter.price_29_35'|trans }}</option>
+			<option value="35-50" {{ filter == '35-50' ? 'selected' }}>{{ 'products.filter.price_35_50'|trans }}</option>
 		</select>
 	</form>
 
 	<div class="products-grid">
 		{% if products is empty %}
-			<p>Aucun produit ne correspond à ce filtrage.</p>
+			<p>{{ 'products.empty'|trans }}</p>
 		{% else %}
 			<div class="products-grid">
 				{% for product in products %}
@@ -27,7 +28,7 @@
 						<h2>{{ product.name }}</h2>
 						<p>{{ product.price }}
 							€</p>
-						<a class="btn" href="{{ path('app_product_show', { id: product.id }) }}">Voir</a>
+						<a class="btn" href="{{ path('app_product_show', { id: product.id }) }}">{{ 'products.view'|trans }}</a>
 					</article>
 				{% endfor %}
 			</div>

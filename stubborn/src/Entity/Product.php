@@ -165,4 +165,16 @@ class Product
 
         return $this;
     }
+
+    public function getStockForSize(string $size): int
+    {
+        return match ($size) {
+            'XS' => $this->getstockXS(),
+            'S'  => $this->getstockS(),
+            'M'  => $this->getstockM(),
+            'L'  => $this->getstockL(),
+            'XL' => $this->getstockXL(),
+            default => 0,
+        };
+    }
 }

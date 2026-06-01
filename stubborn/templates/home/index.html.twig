@@ -6,13 +6,18 @@
 {% block body %}
 
 	<section class="home-hero">
-		<h1>Bienvenue chez Stubborn</h1>
-		<p>Don't compromise on your look.</p>
-		<p>Découvrez nos sweat-shirts de qualité, conçus pour durer.</p>
+		<h1>{{ 'home.hero.title'|trans }}</h1>
+		<p>{{ 'home.hero.slogan'|trans }}</p>
+		<p>{{ 'home.hero.subtitle'|trans }}</p>
+	</section>
+
+	<section class="home-about">
+		<h2>{{ 'home.about.title'|trans }}</h2>
+		<p>{{ 'home.about.text'|trans }}</p>
 	</section>
 
 	<section class="featured-products">
-		<h2>Produits mis en avant</h2>
+		<h2>{{ 'home.featured.title'|trans }}</h2>
 
 		<div class="featured-grid">
 			{% for product in featured %}
@@ -25,7 +30,8 @@
 
 					{% if app.user %}
 						<a class="btn" href="{{ path('app_product_show', {id: product.id}) }}">
-							Voir >
+							{{ 'home.featured.view'|trans }}
+							>
 						</a>
 					{% endif %}
 				</div>

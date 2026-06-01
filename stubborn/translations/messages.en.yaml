@@ -4,6 +4,18 @@
 # see https://symfony.com/doc/current/translation.html
 
 # ===========================
+# SECTION : Menu
+# ===========================
+menu:
+  home: "Home"
+  products: "Shop"
+  cart: "Cart"
+  register: "Sign up"
+  login: "Login"
+  logout: "Logout"
+  admin: "Back-office"
+
+# ===========================
 # SECTION : Registration
 # ===========================
 register:
@@ -74,9 +86,81 @@ error:
   403:
     title: "Access denied"
     message: "You do not have permission to access this resource."
+    details: "Access denied. If you believe this is an error, please contact support."
   404:
     title: "Page not found"
     message: "The page you are looking for does not exist or is no longer available."
   500:
     title: "Internal server error"
     message: "An unexpected error has occurred. Please try again later."
+
+# ===========================
+# SECTION : Cart management
+# ===========================
+cart:
+  title: "Your cart"
+  empty: "Your cart is empty."
+  product:
+    name: "Product"
+    price: "Unit price"
+    size: "Size"
+    quantity: "Quantity"
+    total: "Total"
+  total: "Total cart"
+  checkout: "Proceed to checkout"
+  flash:
+    added: "Product added to cart."
+    removed: "Product removed from cart."
+    cleared: "Cart cleared."
+  actions:
+    name: "Actions"
+    remove: "Remove"
+    continue: "Continue shopping"
+    clear: "Clear cart"
+  status:
+    in_stock: "In stock"
+    out_of_stock: "Out of stock"
+  csrf:
+    invalid: "Invalid CSRF token for the requested action"
+
+# ===========================
+# SECTION : Home page
+# ===========================
+home:
+  hero:
+    title: "Welcome to Stubborn"
+    slogan: "Don't compromise on your look."
+    subtitle: "Discover our high-quality sweatshirts, designed to last."
+  about:
+    title: "About Stubborn"
+    text: >
+      Stubborn is a brand of high-quality sweatshirts, designed to last.
+      We select robust and comfortable materials to offer elegant, 
+      long-lasting and accessible clothing.
+  featured:
+    title: "Featured Products"
+    view: "View"
+
+# ===========================
+# SECTION : Products
+# ===========================
+products:
+  title: "Our products"
+  filter:
+    label: "Filter by price:"
+    all: "All prices"
+    price_10_29: "10 to 29 €"
+    price_29_35: "29 to 35 €"
+    price_35_50: "35 to 50 €"
+  empty: "No products match this filter."
+  view: "View"
+
+# ===========================
+# SECTION : Product details
+# ===========================
+product:
+  size: "Size"
+  size.choose: "-- Choose a size --"
+  add_to_cart: "Add to cart"
+  price: "Price"
+  back_to_products: "← Back to shop"

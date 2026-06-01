@@ -4,6 +4,18 @@
 # see https://symfony.com/doc/current/translation.html
 
 # ===========================
+# SECTION : Menu
+# ===========================
+menu:
+  home: "Accueil"
+  products: "Boutique"
+  cart: "Panier"
+  register: "S'inscrire"
+  login: "Se connecter"
+  logout: "Se déconnecter"
+  admin: "Back-office"
+
+# ===========================
 # SECTION : Registration
 # ===========================
 register:
@@ -74,9 +86,81 @@ error:
   403:
     title: "Accès refusé"
     message: "Vous n'avez pas la permission d'accéder à cette ressource."
+    details: "Accès refusé. Si vous pensez que c'est une erreur, veuillez contacter le support."
   404:
     title: "Page introuvable"
     message: "La page que vous recherchez n'existe pas ou n'est plus disponible."
   500:
     title: "Erreur interne du serveur"
     message: "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+
+# ===========================
+# SECTION : Cart management
+# ===========================
+cart:
+  title: "Votre panier"
+  empty: "Votre panier est vide."
+  product:
+    name: "Produit"
+    price: "Prix unitaire"
+    size: "Taille"
+    quantity: "Quantité"
+    total: "Total"
+  total: "Total du panier"
+  checkout: "Passer à la caisse"
+  flash:
+    added: "Produit ajouté au panier."
+    removed: "Produit retiré du panier."
+    cleared: "Panier vidé."
+  actions:
+    name: "Actions"
+    remove: "Retirer"
+    continue: "Continuer mes achats"
+    clear: "Vider le panier"
+  status:
+    in_stock: "En stock"
+    out_of_stock: "Rupture de stock"
+  csrf:
+    invalid: "Token CSRF invalide pour l’action demandée"
+
+# ===========================
+# SECTION : Home page
+# ===========================
+home:
+  hero:
+    title: "Bienvenue chez Stubborn"
+    slogan: "Don't compromise on your look."
+    subtitle: "Découvrez nos sweat-shirts de qualité, conçus pour durer."
+  about:
+    title: "À propos de Stubborn"
+    text: >
+      Stubborn est une marque de sweat-shirts de qualité, conçus pour durer.
+      Nous sélectionnons des matériaux robustes et confortables pour proposer
+      des vêtements élégants, durables et accessibles.
+  featured:
+    title: "Produits mis en avant"
+    view: "Voir"
+
+# ===========================
+# SECTION : Products
+# ===========================
+products:
+  title: "Nos produits"
+  filter:
+    label: "Filtrer par prix :"
+    all: "Tous les prix"
+    price_10_29: "10 à 29 €"
+    price_29_35: "29 à 35 €"
+    price_35_50: "35 à 50 €"
+  empty: "Aucun produit ne correspond à ce filtrage."
+  view: "Voir"
+
+# ===========================
+# SECTION : Product details
+# ===========================
+product:
+  size: "Taille"
+  size.choose: "-- Choisir une taille --"
+  add_to_cart: "Ajouter au panier"
+  price: "Prix"
+  back_to_products: "← Retour à la boutique"
