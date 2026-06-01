@@ -40,13 +40,15 @@
 							€</td>
 						<td>
 							<div class="cart-qty">
-								<form action="{{ path('cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
+								<form action="{{ path('app_cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token('app_cart_decrease') }}">
 									<button class="btn btn-sm btn-outline-secondary">−</button>
 								</form>
 
 								<span class="mx-2">{{ item.quantity }}</span>
 
-								<form action="{{ path('cart_add', {id: item.product.id, size: item.size}) }}" method="post">
+								<form action="{{ path('app_cart_add', {id: item.product.id, size: item.size}) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
 									<button class="btn btn-sm btn-outline-secondary">+</button>
 								</form>
 							</div>
@@ -54,7 +56,8 @@
 						<td>{{ item.total }}
 							€</td>
 						<td>
-							<form action="{{ path('cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
+							<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
+								<input type="hidden" name="_token" value="{{ csrf_token('app_cart_remove') }}">
 								<button class="btn btn-danger btn-sm">
 									{{ 'cart.actions.remove'|trans }}
 								</button>
@@ -62,7 +65,7 @@
 
 							{# Debug : Pour afficher le chemin de l'URL de suppression #}
 							<small class="text-muted">
-								{{ path('cart_remove', {id: item.product.id, size: item.size}) }}
+								{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}
 							</small>
 						</td>
 					</tr>
@@ -86,7 +89,8 @@
 		</a>
 
 		{% if items is not empty %}
-			<form action="{{ path('cart_clear') }}" method="post">
+			<form action="{{ path('app_cart_clear') }}" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token('app_cart_clear') }}">
 				<button class="btn btn-warning">
 					{{ 'cart.actions.clear'|trans }}
 				</button>

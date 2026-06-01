@@ -18,13 +18,13 @@ class PlaceholderController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    #[Route('/cart', name: 'app_cart')]
+    #[Route('/cart', name: 'ph_app_cart')]
     public function cart(): Response
     {
         return $this->placeholder('Page Panier');
     }
 
-    #[Route('/cart/add/{id}', name: 'app_cart_add')]
+    #[Route('/cart/add/{id}', name: 'ph_app_cart_add')]
     public function addToCart(int $id, Request $request): Response
     {
         $size = $request->query->get('size');

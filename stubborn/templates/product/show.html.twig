@@ -11,19 +11,19 @@
 		<img
 		src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
 
-		{# Formulaire permettant de sélectionner la taille du sweat-shirt #}
-		<form action="{{ path('app_cart_add', { id: product.id }) }}" method="get" class="size-form">
+		{# Formulaire permettant de sélectionner la taille du sweat-shirt, et de l'ajouter au panier #}
+		<form action="{{ path('app_cart_add', { id: product.id, size: 'SIZE_PLACEHOLDER' }) }}" method="post" class="size-form" onsubmit="this.action = this.action.replace('SIZE_PLACEHOLDER', document.getElementById('size').value)">
 			<label for="size">Taille :</label>
 			<select name="size" id="size" required>
 				<option value="" disabled selected>-- Choisir une taille --</option>
-				{# <option value="S">S</option>
-								<option value="M">M</option>
-								<option value="L">L</option>
-								<option value="XL">XL</option> #}
 				{% for size in constant('App\\Entity\\Product::SIZES') %}
 					<option value="{{ size }}">{{ size }}</option>
 				{% endfor %}
 			</select>
+
+			{# Token CSRF et redirection pour le panier #}
+			<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
+			<input type="hidden" name="redirectTo" value="{{ app.request.uri }}">
 
 			<button type="submit" class="btn">Ajouter au panier</button>
 		</form>

@@ -44,7 +44,7 @@ class TestCartController extends AbstractController
         );
     }
 
-    #[Route('/test/cart', name: 'test_cart')]
+    #[Route('/test/cart', name: 'test_app_cart')]
     public function test(CartService $cartService): Response
     {
         // Test 1 : clear

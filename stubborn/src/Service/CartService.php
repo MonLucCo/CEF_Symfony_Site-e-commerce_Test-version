@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -29,6 +30,11 @@ class CartService
 
     public function add(int $productId, string $size): void
     {
+        // Validation de la taille
+        if (!in_array($size, Product::SIZES, true)) {
+            return; // ou throw une exception si tu veux être strict
+        }
+
         $cart = $this->getCart();
         $product = $this->productRepository->find($productId);
 
@@ -36,8 +42,11 @@ class CartService
             return;
         }
 
-        // Stock max pour cette taille
+        // Vérification du stock pour cette taille
         $maxStock = $product->getStockForSize($size);
+        if ($maxStock === null) {
+            return;
+        }
 
         // Si le produit n'existe pas encore dans le panier
         if (!isset($cart[$productId])) {

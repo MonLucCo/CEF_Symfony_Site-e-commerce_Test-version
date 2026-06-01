@@ -74,6 +74,7 @@ error:
   403:
     title: "Accès refusé"
     message: "Vous n'avez pas la permission d'accéder à cette ressource."
+    details: "Accès refusé. Si vous pensez que c'est une erreur, veuillez contacter le support."
   404:
     title: "Page introuvable"
     message: "La page que vous recherchez n'existe pas ou n'est plus disponible."
@@ -107,3 +108,5 @@ cart:
   status:
     in_stock: "En stock"
     out_of_stock: "Rupture de stock"
+  csrf:
+    invalid: "Token CSRF invalide pour l’action demandée"
