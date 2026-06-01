@@ -117,14 +117,8 @@ class CartService
         $cart = $this->getCart();
         $detailedCart = [];
 
-        dump('getDetailedCart : ' . json_encode($cart)); // Debug : pour vérifier la structure du panier
-
         foreach ($cart as $productId => $sizes) {
             $product = $this->productRepository->find($productId);
-
-            dump('Boucle getDetailedCart : ' . $productId .
-                ' - ' . json_encode($sizes) .
-                ' # {' . $product->getId() . ' - ' . $product->getName() . '}'); // Debug : pour vérifier le produit trouvé
 
             if (!$product) {
                 continue;
@@ -140,9 +134,6 @@ class CartService
                     'quantity' => $quantity,
                     'total' => $product->getPrice() * $quantity,
                 ];
-
-                dump('Item ajouté au detailedCart : ' . json_encode(end($detailedCart))); // Debug : pour vérifier les items ajoutés
-
             }
         }
 

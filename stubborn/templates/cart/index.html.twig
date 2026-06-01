@@ -36,7 +36,7 @@
 					<tr>
 						<td>{{ item.product.name }}</td>
 						<td>{{ item.size }}</td>
-						<td>{{ item.price }}
+						<td>{{ item.price|number_format(2, ',', ' ') }}
 							€</td>
 						<td>
 							<div class="cart-qty">
@@ -53,7 +53,7 @@
 								</form>
 							</div>
 						</td>
-						<td>{{ item.total }}
+						<td>{{ item.total|number_format(2, ',', ' ') }}
 							€</td>
 						<td>
 							<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
@@ -62,11 +62,6 @@
 									{{ 'cart.actions.remove'|trans }}
 								</button>
 							</form>
-
-							{# Debug : Pour afficher le chemin de l'URL de suppression #}
-							<small class="text-muted">
-								{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}
-							</small>
 						</td>
 					</tr>
 				{% endfor %}
@@ -76,10 +71,9 @@
 		<p class="text-end">
 			<strong>{{ 'cart.total'|trans }}
 				:
-				{{ total }}
+				{{ total|number_format(2, ',', ' ') }}
 				€</strong>
 		</p>
-
 	{% endif %}
 
 	<div class="cart-actions">
@@ -98,8 +92,5 @@
 		{% endif %}
 
 	</div>
-
-	{# Debug : Formulaire de test manuel pour ajouter un article #}
-	{% include 'test/_addItem.html.twig' %}
 
 {% endblock %}
