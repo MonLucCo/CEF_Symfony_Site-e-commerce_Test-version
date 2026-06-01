@@ -60,7 +60,7 @@ STRIPE_PUBLIC_KEY=pk_test_xxx
 - [x] Connexion / déconnexion  
 - [x] Liste des produits + filtres de prix  
 - [x] Fiche produit avec choix de taille  
-- [ ] Panier en session  
+- [x] Panier en session  
 - [ ] Paiement Stripe (Checkout)  
 - [ ] Back‑office (CRUD produits)  
 - [ ] Tests unitaires (panier + achat)  
