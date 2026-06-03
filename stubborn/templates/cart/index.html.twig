@@ -89,6 +89,10 @@
 					{{ 'cart.actions.clear'|trans }}
 				</button>
 			</form>
+
+			<a href="{{ path('order_checkout') }}" class="btn btn-primary">
+				{{ 'cart.actions.checkout'|trans }}
+			</a>
 		{% endif %}
 
 	</div>

@@ -107,7 +107,6 @@ cart:
     quantity: "Quantity"
     total: "Total"
   total: "Total cart"
-  checkout: "Proceed to checkout"
   flash:
     added: "Product added to cart."
     removed: "Product removed from cart."
@@ -117,6 +116,7 @@ cart:
     remove: "Remove"
     continue: "Continue shopping"
     clear: "Clear cart"
+    checkout: "Proceed to checkout"
   status:
     in_stock: "In stock"
     out_of_stock: "Out of stock"
@@ -164,3 +164,22 @@ product:
   add_to_cart: "Add to cart"
   price: "Price"
   back_to_products: "← Back to shop"
+
+# ===========================
+# SECTION : Order
+# ===========================
+order:
+  success:
+    title: "Payment successful"
+    subtitle: "Thank you for your order!"
+    message: "Your payment has been successfully confirmed and your order is being processed."
+    back_home: "← Back to home"
+    back_shop: "← Continue shopping"
+
+  cancel:
+    title: "Payment cancelled"
+    subtitle: "Your payment was not completed."
+    message: "No amount has been charged. You can return to your cart to modify your order or try the payment again."
+    retry: "Try payment again"
+    back_cart: "← Back to cart"
+    back_home: "← Back to home"

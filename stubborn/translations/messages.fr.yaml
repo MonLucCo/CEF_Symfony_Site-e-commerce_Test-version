@@ -107,7 +107,6 @@ cart:
     quantity: "Quantité"
     total: "Total"
   total: "Total du panier"
-  checkout: "Passer à la caisse"
   flash:
     added: "Produit ajouté au panier."
     removed: "Produit retiré du panier."
@@ -117,6 +116,7 @@ cart:
     remove: "Retirer"
     continue: "Continuer mes achats"
     clear: "Vider le panier"
+    checkout: "Finaliser ma commande"
   status:
     in_stock: "En stock"
     out_of_stock: "Rupture de stock"
@@ -164,3 +164,22 @@ product:
   add_to_cart: "Ajouter au panier"
   price: "Prix"
   back_to_products: "← Retour à la boutique"
+
+# ===========================
+# SECTION : Order
+# ===========================
+order:
+  success:
+    title: "Paiement réussi"
+    subtitle: "Merci pour votre commande !"
+    message: "Votre paiement a bien été confirmé et votre commande est en cours de traitement."
+    back_home: "← Retour à l'accueil"
+    back_shop: "← Continuer mes achats"
+
+  cancel:
+    title: "Paiement annulé"
+    subtitle: "Le paiement n'a pas été finalisé."
+    message: "Aucun montant n'a été débité. Vous pouvez retourner à votre panier pour modifier votre commande ou réessayer le paiement."
+    retry: "Réessayer le paiement"
+    back_cart: "← Retour au panier"
+    back_home: "← Retour à l'accueil"
