@@ -175,7 +175,6 @@ order:
     message: "Votre paiement a bien été confirmé et votre commande est en cours de traitement."
     back_home: "← Retour à l'accueil"
     back_shop: "← Continuer mes achats"
-
   cancel:
     title: "Paiement annulé"
     subtitle: "Le paiement n'a pas été finalisé."
@@ -183,3 +182,7 @@ order:
     retry: "Réessayer le paiement"
     back_cart: "← Retour au panier"
     back_home: "← Retour à l'accueil"
+  flash:
+    empty_quantities: "La quantité d'article est insuffisante, pas de commande."
+  stripe:
+    size: "Taille %size%"

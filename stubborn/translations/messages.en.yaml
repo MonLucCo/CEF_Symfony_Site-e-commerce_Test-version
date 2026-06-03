@@ -175,7 +175,6 @@ order:
     message: "Your payment has been successfully confirmed and your order is being processed."
     back_home: "← Back to home"
     back_shop: "← Continue shopping"
-
   cancel:
     title: "Payment cancelled"
     subtitle: "Your payment was not completed."
@@ -183,3 +182,7 @@ order:
     retry: "Try payment again"
     back_cart: "← Back to cart"
     back_home: "← Back to home"
+  flash:
+    empty_quantities: "The item quantity is insufficient, no order created."
+  stripe:
+    size: "Size %size%"
