@@ -184,5 +184,18 @@ order:
     back_home: "← Back to home"
   flash:
     empty_quantities: "The item quantity is insufficient, no order created."
+    admin_forbidden: "Administrators cannot place orders."
+    login_required: "You must be logged in to place an order."
+    user_not_verified: "Your email address is not verified. Please verify your email address to place an order."
   stripe:
     size: "Size %size%"
+
+# ===========================
+# SECTION : Account verification
+# ===========================
+account:
+  not_verified:
+    title: "Account not verified"
+    message: "Your account is not yet activated. Please check your emails or request a new verification email."
+    resend: "Resend verification email"
+    back_home: "← Back to home"

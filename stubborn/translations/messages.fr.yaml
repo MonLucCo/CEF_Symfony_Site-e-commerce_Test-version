@@ -184,5 +184,18 @@ order:
     back_home: "← Retour à l'accueil"
   flash:
     empty_quantities: "La quantité d'article est insuffisante, pas de commande."
+    admin_forbidden: "Les administrateurs ne peuvent pas passer de commande."
+    login_required: "Vous devez être connecté pour passer commande."
+    user_not_verified: "Votre adresse email n'est pas vérifiée. Veuillez vérifier votre adresse email pour passer commande."
   stripe:
     size: "Taille %size%"
+
+# ===========================
+# SECTION : Account verification
+# ===========================
+account:
+  not_verified:
+    title: "Compte non vérifié"
+    message: "Votre compte n'est pas encore activé. Veuillez vérifier vos emails ou demander un nouvel envoi."
+    resend: "Renvoyer l'email de vérification"
+    back_home: "← Retour à l'accueil"
