@@ -177,4 +177,16 @@ class Product
             default => 0,
         };
     }
+
+    public function decreaseStockForSize(string $size, int $quantity): void
+    {
+        match ($size) {
+            'XS' => $this->stockXS = max(0, $this->stockXS - $quantity),
+            'S'  => $this->stockS  = max(0, $this->stockS  - $quantity),
+            'M'  => $this->stockM  = max(0, $this->stockM  - $quantity),
+            'L'  => $this->stockL  = max(0, $this->stockL  - $quantity),
+            'XL' => $this->stockXL = max(0, $this->stockXL - $quantity),
+            default => null,
+        };
+    }
 }

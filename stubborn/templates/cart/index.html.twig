@@ -29,6 +29,7 @@
 					<th>{{ 'cart.product.quantity'|trans }}</th>
 					<th>{{ 'cart.product.total'|trans }}</th>
 					<th>{{ 'cart.actions.name'|trans }}</th>
+					<th>{{ 'cart.product.stock'|trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,6 +63,15 @@
 									{{ 'cart.actions.remove'|trans }}
 								</button>
 							</form>
+						</td>
+						<td>
+							{% set stock = item.product.getStockForSize(item.size) %}
+							{% if stock > 0 %}
+								{{ stock }}
+								{{ 'cart.status.in_stock'|trans }}
+							{% else %}
+								<span class="text-danger">{{ 'cart.status.out_of_stock'|trans }}</span>
+							{% endif %}
 						</td>
 					</tr>
 				{% endfor %}

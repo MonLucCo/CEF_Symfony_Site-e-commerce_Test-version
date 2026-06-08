@@ -106,6 +106,7 @@ cart:
     size: "Taille"
     quantity: "Quantité"
     total: "Total"
+    stock: "Disponibilité"
   total: "Total du panier"
   flash:
     added: "Produit ajouté au panier."
@@ -118,7 +119,7 @@ cart:
     clear: "Vider le panier"
     checkout: "Finaliser ma commande"
   status:
-    in_stock: "En stock"
+    in_stock: "en stock"
     out_of_stock: "Rupture de stock"
   csrf:
     invalid: "Token CSRF invalide pour l’action demandée"
@@ -175,6 +176,7 @@ order:
     message: "Votre paiement a bien été confirmé et votre commande est en cours de traitement."
     back_home: "← Retour à l'accueil"
     back_shop: "← Continuer mes achats"
+    send_email: "Recevoir un email de confirmation"
   cancel:
     title: "Paiement annulé"
     subtitle: "Le paiement n'a pas été finalisé."
@@ -187,6 +189,7 @@ order:
     admin_forbidden: "Les administrateurs ne peuvent pas passer de commande."
     login_required: "Vous devez être connecté pour passer commande."
     user_not_verified: "Votre adresse email n'est pas vérifiée. Veuillez vérifier votre adresse email pour passer commande."
+    success_order: "Votre commande a été confirmée. Un email récapitulatif vous a été envoyé."
   stripe:
     size: "Taille %size%"
 
