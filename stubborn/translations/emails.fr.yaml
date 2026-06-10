@@ -1,0 +1,21 @@
+# ===========================
+# SECTION : Email confirmation commande
+# ===========================
+order_email:
+  subject: "Confirmation de votre commande Stubborn"
+  from:
+    address: "no-reply@stubborn.com"
+    name: "Stubborn Mailer"
+  greeting: "Bonjour %name%,"
+  message: "Merci pour votre commande chez Stubborn ! Nous sommes ravis de vous compter parmi nos clients. Votre commande a été confirmée et est en cours de traitement. Vous recevrez une notification lorsque votre commande sera expédiée."
+  closing: "Cordialement,"
+  signature: "L'équipe Stubborn"
+  summary:
+    title: "Récapitulatif de votre commande"
+    product: "Produit"
+    size: "Taille"
+    quantity: "Quantité"
+    price: "Prix unitaire"
+    total: "Total"
+    total_order: "Total de la commande : %total% €"
+  timestamp: "Envoyé le : %timestamp%"

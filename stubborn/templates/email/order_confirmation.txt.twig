@@ -1,0 +1,33 @@
+{{ 'order_email.greeting'|trans({'%name%': user.name}) }}
+
+{{ 'order_email.message'|trans }}
+
+{{ 'order_email.summary.title'|trans }}
+
+{{ 'order_email.summary.product'|trans }}
+|
+{{ 'order_email.summary.size'|trans }}
+|
+{{ 'order_email.summary.price'|trans }}
+|
+{{ 'order_email.summary.quantity'|trans }}
+|
+{{ 'order_email.summary.total'|trans }}
+{% for item in items %}
+	{{ item.product.name }}
+	|
+	{{ item.size }}
+	|
+	{{ item.price|number_format(2, ',', ' ') }}
+	€ |
+	{{ item.quantity }}
+	|
+	{{ item.total|number_format(2, ',', ' ') }}
+	€
+{% endfor %}
+
+{{ 'order_email.summary.total_order'|trans({'%total%': total|number_format(2, ',', ' ')}) }}
+
+{{ 'order_email.closing'|trans }}
+{{ 'order_email.signature'|trans }}
+{{ 'order_email.timestamp'|trans({'%timestamp%': timestamp}) }}

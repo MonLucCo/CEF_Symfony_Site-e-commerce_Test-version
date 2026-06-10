@@ -1,0 +1,45 @@
+{% trans_default_domain 'emails' %}
+
+<h2>{{ 'order_email.greeting'|trans({'%name%': user.name}) }}</h2>
+
+<p>{{ 'order_email.message'|trans }}</p>
+
+<h3>{{ 'order_email.summary.title'|trans }}</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th>{{ 'order_email.summary.product'|trans }}</th>
+			<th>{{ 'order_email.summary.size'|trans }}</th>
+			<th>{{ 'order_email.summary.price'|trans }}</th>
+			<th>{{ 'order_email.summary.quantity'|trans }}</th>
+			<th>{{ 'order_email.summary.total'|trans }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in items %}
+			<tr>
+				<td>{{ item.product.name }}</td>
+				<td>{{ item.size }}</td>
+				<td>{{ item.price|number_format(2, ',', ' ') }}
+					€</td>
+				<td>{{ item.quantity }}</td>
+				<td>{{ item.total|number_format(2, ',', ' ') }}
+					€</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<p>
+	<strong>{{ 'order_email.summary.total_order'|trans({'%total%': total|number_format(2, ',', ' ')}) }}</strong>
+</p>
+
+<p>{{ 'order_email.closing'|trans }}</p>
+<p>{{ 'order_email.signature'|trans }}</p>
+
+{% if timestamp is defined %}
+	<p>
+		<small>{{ 'order_email.timestamp'|trans({'%timestamp%': timestamp}) }}</small>
+	</p>
+{% endif %}

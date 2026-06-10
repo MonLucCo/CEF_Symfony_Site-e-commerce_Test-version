@@ -1,5 +1,9 @@
 twig:
-    file_name_pattern: '*.twig'
+    file_name_pattern: "*.twig"
+
+    debug: true # true en dev, false en prod
+    strict_variables: true # true en dev, false en prod
+    cache: false # false en dev, true en prod
 
 when@test:
     twig:
