@@ -1,7 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
-        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
@@ -21,32 +21,31 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_database             # Le provider utilisé pour l'authentification
+            provider: users_in_database # Le provider utilisé pour l'authentification
 
-            entry_point: form_login                 # Point d'entrée personnalisé pour les utilisateurs non authentifiés
+            entry_point: form_login # Point d'entrée personnalisé pour les utilisateurs non authentifiés
 
             form_login:
-                login_path: app_login               # Route du formulaire de connexion
-                check_path: app_login               # Route de soumission du formulaire de connexion
-                enable_csrf: true                   # Protection CSRF activée pour le formulaire de connexion
-                default_target_path: app_home       # Route de redirection après une connexion réussie
+                login_path: app_login # Route du formulaire de connexion
+                check_path: app_login # Route de soumission du formulaire de connexion
+                enable_csrf: true # Protection CSRF activée pour le formulaire de connexion
+                default_target_path: app_home # Route de redirection après une connexion réussie
 
             logout:
-                path: app_logout                    # Route de déconnexion
-                target: app_home                    # Route de redirection après la déconnexion
-                invalidate_session: true            # Invalide la session lors de la déconnexion
+                path: app_logout # Route de déconnexion
+                target: app_home # Route de redirection après la déconnexion
+                invalidate_session: true # Invalide la session lors de la déconnexion
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
-            custom_authenticator: 
-                - App\Security\LoginFormAuthenticator   # Authentificateur personnalisé pour gérer la connexion via formulaire
+            custom_authenticator:
+                - App\Security\LoginFormAuthenticator # Authentificateur personnalisé pour gérer la connexion via formulaire
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
     # Note: Only the *first* matching rule is applied
     access_control:
-
         # --- ROUTES PUBLIQUES ---
         - { path: ^/$, roles: PUBLIC_ACCESS }
         - { path: ^/login$, roles: PUBLIC_ACCESS }
@@ -55,12 +54,14 @@ security:
 
         # --- ROUTES UTILISATEUR CONNECTÉ ---
         - { path: ^/register/resend$, roles: ROLE_USER }
+        - { path: ^/cart, roles: ROLE_USER }
+        - { path: ^/order, roles: ROLE_USER }
 
         # --- ROUTES ADMIN ---
         - { path: ^/admin, roles: ROLE_ADMIN }
 
         # --- ROUTES TECHNIQUES ---
-        - { path: ^/logout$, roles: ROLE_USER }        
+        - { path: ^/logout$, roles: ROLE_USER }
 
 when@test:
     security:

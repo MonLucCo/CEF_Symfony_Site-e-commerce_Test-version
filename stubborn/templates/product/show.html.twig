@@ -14,10 +14,19 @@
 		{# Formulaire permettant de sélectionner la taille du sweat-shirt, et de l'ajouter au panier #}
 		<form action="{{ path('app_cart_add', { id: product.id, size: 'SIZE_PLACEHOLDER' }) }}" method="post" class="size-form" onsubmit="this.action = this.action.replace('SIZE_PLACEHOLDER', document.getElementById('size').value)">
 			<label for="size">{{ 'product.size'|trans }}</label>
-			<select name="size" id="size" required>
+			<select name="size" id="size" class="form-select" required>
 				<option value="" disabled selected>{{ 'product.size.choose'|trans }}</option>
 				{% for size in constant('App\\Entity\\Product::SIZES') %}
-					<option value="{{ size }}">{{ size }}</option>
+					{% set qty = product.getStockForSize(size) %}
+
+					<option value="{{ size }}" {% if qty == 0 %} disabled {% endif %}>
+						{{ size }}
+						{% if qty == 0 %}({{ 'cart.status.out_of_stock'|trans }})
+						{% else %}
+							({{ qty }}
+							{{ 'cart.status.in_stock'|trans }})
+						{% endif %}
+					</option>
 				{% endfor %}
 			</select>
 

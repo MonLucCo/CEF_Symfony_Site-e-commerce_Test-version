@@ -29,6 +29,7 @@
 					<th>{{ 'cart.product.quantity'|trans }}</th>
 					<th>{{ 'cart.product.total'|trans }}</th>
 					<th>{{ 'cart.actions.name'|trans }}</th>
+					<th>{{ 'cart.product.stock'|trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,6 +64,15 @@
 								</button>
 							</form>
 						</td>
+						<td>
+							{% set stock = item.product.getStockForSize(item.size) %}
+							{% if stock > 0 %}
+								{{ stock }}
+								{{ 'cart.status.in_stock'|trans }}
+							{% else %}
+								<span class="text-danger">{{ 'cart.status.out_of_stock'|trans }}</span>
+							{% endif %}
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
@@ -89,6 +99,12 @@
 					{{ 'cart.actions.clear'|trans }}
 				</button>
 			</form>
+
+			{% if is_granted('ROLE_USER') and is_granted('IS_VERIFIED') and not is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('app_order_checkout') }}" class="btn btn-primary">
+					{{ 'cart.actions.checkout'|trans }}
+				</a>
+			{% endif %}
 		{% endif %}
 
 	</div>

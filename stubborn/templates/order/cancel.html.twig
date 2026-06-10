@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'order.cancel.title'|trans }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ 'order.cancel.title'|trans }}</h1>
+	<h2>{{ 'order.cancel.subtitle'|trans }}</h2>
+
+	<p>{{ 'order.cancel.message'|trans }}</p>
+
+	<p>
+		<a href="{{ path('app_order_checkout') }}">{{ 'order.cancel.retry'|trans }}</a>
+	</p>
+
+	<p>
+		<a href="{{ path('app_cart_index') }}">{{ 'order.cancel.back_cart'|trans }}</a>
+	</p>
+
+	<p>
+		<a href="{{ path('app_home') }}">{{ 'order.cancel.back_home'|trans }}</a>
+	</p>
+
+{% endblock %}

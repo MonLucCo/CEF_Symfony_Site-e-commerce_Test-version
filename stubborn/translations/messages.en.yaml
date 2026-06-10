@@ -106,8 +106,8 @@ cart:
     size: "Size"
     quantity: "Quantity"
     total: "Total"
+    stock: "Availability"
   total: "Total cart"
-  checkout: "Proceed to checkout"
   flash:
     added: "Product added to cart."
     removed: "Product removed from cart."
@@ -117,8 +117,9 @@ cart:
     remove: "Remove"
     continue: "Continue shopping"
     clear: "Clear cart"
+    checkout: "Proceed to checkout"
   status:
-    in_stock: "In stock"
+    in_stock: "in stock"
     out_of_stock: "Out of stock"
   csrf:
     invalid: "Invalid CSRF token for the requested action"
@@ -164,3 +165,40 @@ product:
   add_to_cart: "Add to cart"
   price: "Price"
   back_to_products: "← Back to shop"
+
+# ===========================
+# SECTION : Order
+# ===========================
+order:
+  success:
+    title: "Payment successful"
+    subtitle: "Thank you for your order!"
+    message: "Your payment has been successfully confirmed and your order is being processed."
+    back_home: "← Back to home"
+    back_shop: "← Continue shopping"
+    send_email: "Send confirmation email"
+  cancel:
+    title: "Payment cancelled"
+    subtitle: "Your payment was not completed."
+    message: "No amount has been charged. You can return to your cart to modify your order or try the payment again."
+    retry: "Try payment again"
+    back_cart: "← Back to cart"
+    back_home: "← Back to home"
+  flash:
+    empty_quantities: "The item quantity is insufficient, no order created."
+    admin_forbidden: "Administrators cannot place orders."
+    login_required: "You must be logged in to place an order."
+    user_not_verified: "Your email address is not verified. Please verify your email address to place an order."
+    success_order: "Your order has been confirmed. A confirmation email has been sent to you."
+  stripe:
+    size: "Size %size%"
+
+# ===========================
+# SECTION : Account verification
+# ===========================
+account:
+  not_verified:
+    title: "Account not verified"
+    message: "Your account is not yet activated. Please check your emails or request a new verification email."
+    resend: "Resend verification email"
+    back_home: "← Back to home"

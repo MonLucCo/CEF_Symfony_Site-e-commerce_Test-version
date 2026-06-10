@@ -150,4 +150,26 @@ class CartService
 
         return $total;
     }
+
+    public function saveLastOrder(array $items, float $total): void
+    {
+        $this->session->set('last_order_items', $items);
+        $this->session->set('last_order_total', $total);
+    }
+
+    public function getLastOrderItems(): array
+    {
+        return $this->session->get('last_order_items', []);
+    }
+
+    public function getLastOrderTotal(): float
+    {
+        return $this->session->get('last_order_total', 0);
+    }
+
+    public function clearLastOrder(): void
+    {
+        $this->session->remove('last_order_items');
+        $this->session->remove('last_order_total');
+    }
 }

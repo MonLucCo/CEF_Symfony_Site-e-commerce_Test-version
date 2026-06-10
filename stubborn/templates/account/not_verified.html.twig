@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'account.not_verified.title'|trans }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ 'account.not_verified.title'|trans }}</h1>
+	<p>{{ 'account.not_verified.message'|trans }}</p>
+
+	<p>
+		<a href="{{ path('app_register_resend') }}">
+			{{ 'account.not_verified.resend'|trans }}
+		</a>
+	</p>
+
+	<p>
+		<a href="{{ path('app_home') }}">
+			{{ 'account.not_verified.back_home'|trans }}
+		</a>
+	</p>
+
+{% endblock %}
