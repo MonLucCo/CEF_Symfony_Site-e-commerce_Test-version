@@ -51,8 +51,8 @@ class StripeService
             'payment_method_types' => ['card'],
             'mode' => 'payment',
             'line_items' => $lineStripeItems,
-            'success_url' => $this->urlGenerator->generate('order_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_url' => $this->urlGenerator->generate('order_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => $this->urlGenerator->generate('app_order_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->urlGenerator->generate('app_order_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'locale' => $locale,
         ]);
     }

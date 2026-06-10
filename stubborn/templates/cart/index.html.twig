@@ -101,7 +101,7 @@
 			</form>
 
 			{% if is_granted('ROLE_USER') and is_granted('IS_VERIFIED') and not is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('order_checkout') }}" class="btn btn-primary">
+				<a href="{{ path('app_order_checkout') }}" class="btn btn-primary">
 					{{ 'cart.actions.checkout'|trans }}
 				</a>
 			{% endif %}

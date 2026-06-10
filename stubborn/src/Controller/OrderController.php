@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class OrderController extends AbstractController
 {
-    #[Route('/order/checkout', name: 'order_checkout')]
+    #[Route('/order/checkout', name: 'app_order_checkout')]
     public function checkout(
         OrderService $orderService
     ): Response {
@@ -47,7 +47,7 @@ class OrderController extends AbstractController
         return $this->redirect($session->url);
     }
 
-    #[Route('/order/success', name: 'order_success')]
+    #[Route('/order/success', name: 'app_order_success')]
     public function success(
         OrderService $orderService
     ): Response {
@@ -66,7 +66,7 @@ class OrderController extends AbstractController
         return $this->render('order/success.html.twig');
     }
 
-    #[Route('/order/cancel', name: 'order_cancel')]
+    #[Route('/order/cancel', name: 'app_order_cancel')]
     public function cancel(): Response
     {
         // Contrôle des accès direct
@@ -81,7 +81,7 @@ class OrderController extends AbstractController
         return $this->render('order/cancel.html.twig');
     }
 
-    #[Route('/order/send-confirmation', name: 'order_send_confirmation')]
+    #[Route('/order/send-confirmation', name: 'app_order_send_confirmation')]
     public function sendConfirmation(
         OrderService $orderService
     ): Response {
