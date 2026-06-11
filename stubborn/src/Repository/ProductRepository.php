@@ -31,6 +31,14 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return int Returns the number of featured products
+     */
+    public function countFeatured(): int
+    {
+        return $this->count(['isFeatured' => true]);
+    }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

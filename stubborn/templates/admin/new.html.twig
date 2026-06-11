@@ -1,0 +1,37 @@
+{% trans_default_domain 'admin' %}
+
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ 'admin.add_title'|trans }}{% endblock %}
+
+{% block body %}
+<h1>{{ 'admin.add_title'|trans }}</h1>
+
+{{ form_start(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.imageFile) }}
+
+    <fieldset class="mt-4 p-3 border rounded">
+        <legend class="fw-bold">{{ 'product.form.stock.legend'|trans({}, 'forms') }}</legend>
+
+        <p class="form-text text-muted">
+            {{ 'product.form.stock.help'|trans({}, 'forms') }}
+        </p>
+
+        {{ form_row(form.stockXS) }}
+        {{ form_row(form.stockS) }}
+        {{ form_row(form.stockM) }}
+        {{ form_row(form.stockL) }}
+        {{ form_row(form.stockXL) }}
+    </fieldset>
+
+    <button class="btn btn-success">{{ 'admin.actions.add'|trans }}</button>
+
+{{ form_end(form) }}
+
+<a href="{{ path('app_admin') }}" class="btn btn-secondary">
+    {{ 'admin.actions.back'|trans }}
+</a>
+{% endblock %}

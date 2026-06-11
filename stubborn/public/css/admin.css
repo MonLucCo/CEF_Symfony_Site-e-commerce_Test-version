@@ -1,0 +1,25 @@
+body {
+    background: #524d4d;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #727070;
+    color: white;
+    padding: 1rem;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+}
+
+.text-danger {
+    color: red;
+}

@@ -1,0 +1,38 @@
+admin:
+  welcome: "Welcome! Stubborn admin panel"
+
+  title: "Back-office"
+  list_title: "List of products"
+  add_title: "Add a product"
+  edit_title: "Edit a product"
+
+  table:
+    image: "Image"
+    name: "Name"
+    price: "Price"
+    stock: "Stock"
+    featured: "Featured"
+    actions: "Actions"
+
+  featured:
+    yes: "Yes"
+    no: "No"
+
+  actions:
+    add: "Add"
+    edit: "Edit"
+    save: "Save"
+    delete: "Delete"
+    confirm_delete: "Confirm deletion?"
+    feature: "Feature"
+    unfeature: "Unfeature"
+    back: "Back"
+
+  flash:
+    product_created: "Product added successfully."
+    product_updated: "Product updated successfully."
+    product_deleted: "Product deleted."
+    featured_added: "Product featured."
+    featured_removed: "Product removed from featured."
+    featured_limit: "You cannot feature more than 3 products."
+    upload_error: "Error occurred while uploading the image."

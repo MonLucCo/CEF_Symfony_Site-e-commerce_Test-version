@@ -1,0 +1,38 @@
+admin:
+  welcome: "Bienvenue ! Back-office de Stubborn"
+
+  title: "Back-office"
+  list_title: "Liste des produits"
+  add_title: "Ajouter un produit"
+  edit_title: "Modifier un produit"
+
+  table:
+    image: "Image"
+    name: "Nom"
+    price: "Prix"
+    stock: "Stock"
+    featured: "Mise en avant"
+    actions: "Actions"
+
+  featured:
+    yes: "Oui"
+    no: "Non"
+
+  actions:
+    add: "Ajouter"
+    edit: "Modifier"
+    save: "Enregistrer"
+    delete: "Supprimer"
+    confirm_delete: "Confirmer la suppression ?"
+    feature: "Mettre en avant"
+    unfeature: "Retirer"
+    back: "Retour"
+
+  flash:
+    product_created: "Produit ajouté avec succès."
+    product_updated: "Produit modifié avec succès."
+    product_deleted: "Produit supprimé."
+    featured_added: "Produit mis en avant."
+    featured_removed: "Produit retiré de la mise en avant."
+    featured_limit: "Vous ne pouvez pas mettre plus de 3 produits en avant."
+    upload_error: "Erreur lors de l'upload de l'image."

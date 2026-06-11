@@ -1,0 +1,22 @@
+# ===========================
+# SECTION : Formulaire de produit
+# ===========================
+product:
+  form:
+    name:
+      label: "Nom du produit"
+      help: "Champs obligatoire. Maximum 255 caractères."
+    price:
+      label: "Prix (€)"
+      help: "Champs obligatoire. Prix en euros. Ex : 19.99 - valeur minimale 0.01."
+    image:
+      label: "Image"
+      help: "Champs optionnel. Format accepté : JPG, PNG, WEBP. Taille maximale : 2MB."
+    stock:
+      xs: "Stock XS"
+      s: "Stock S"
+      m: "Stock M"
+      l: "Stock L"
+      xl: "Stock XL"
+      legend: "Stock par taille"
+      help: "Les champs de stock représentent la quantité totale disponible pour chaque taille. Si vous laissez un champ vide, la valeur 0 sera utilisée."

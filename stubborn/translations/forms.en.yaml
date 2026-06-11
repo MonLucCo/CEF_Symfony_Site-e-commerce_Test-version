@@ -1,0 +1,22 @@
+# ===========================
+# SECTION : Product form
+# ===========================
+product:
+  form:
+    name:
+      label: "Product name*"
+      help: "Required field. Maximum 255 characters."
+    price:
+      label: "Price (€)"
+      help: "Required field. Price in euros. Example: 19.99 - minimum value 0.01."
+    image:
+      label: "Image"
+      help: "Optional field. Accepted formats: JPG, PNG, WEBP. Maximum size: 2MB."
+    stock:
+      xs: "Stock XS"
+      s: "Stock S"
+      m: "Stock M"
+      l: "Stock L"
+      xl: "Stock XL"
+      legend: "Stock by size"
+      help: "The stock fields represent the total quantity available for each size. If you leave a field empty, the value 0 will be used."
