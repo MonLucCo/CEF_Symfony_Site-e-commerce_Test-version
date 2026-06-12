@@ -24,7 +24,7 @@
 			<div class="products-grid">
 				{% for product in products %}
 					<article class="product-card">
-						<img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
+						<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
 						<h2>{{ product.name }}</h2>
 						<p>{{ product.price }}
 							€</p>

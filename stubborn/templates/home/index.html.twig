@@ -16,27 +16,29 @@
 		<p>{{ 'home.about.text'|trans }}</p>
 	</section>
 
-	<section class="featured-products">
-		<h2>{{ 'home.featured.title'|trans }}</h2>
+	{% if featured %}
+		<section class="featured-products">
+			<h2>{{ 'home.featured.title'|trans }}</h2>
 
-		<div class="featured-grid">
-			{% for product in featured %}
-				<div class="product-card">
-					<img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
+			<div class="featured-grid">
+				{% for product in featured %}
+					<div class="product-card">
+						<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
 
-					<h3>{{ product.name }}</h3>
-					<p>{{ product.price }}
-						€</p>
+						<h3>{{ product.name }}</h3>
+						<p>{{ product.price }}
+							€</p>
 
-					{% if app.user %}
-						<a class="btn" href="{{ path('app_product_show', {id: product.id}) }}">
-							{{ 'home.featured.view'|trans }}
-							>
-						</a>
-					{% endif %}
-				</div>
-			{% endfor %}
-		</div>
-	</section>
+						{% if app.user %}
+							<a class="btn" href="{{ path('app_product_show', {id: product.id}) }}">
+								{{ 'home.featured.view'|trans }}
+								>
+							</a>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	{% endif %}
 
 {% endblock %}

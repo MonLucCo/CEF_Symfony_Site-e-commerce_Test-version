@@ -5,83 +5,88 @@
 {% block title %}{{ 'admin.title'|trans }}{% endblock %}
 
 {% block body %}
-<h1>{{ 'admin.title'|trans }}</h1>
+    <h1>{{ 'admin.list_title'|trans }}</h1>
 
-{# Messages flash #}
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="flash flash-{{ label }}">{{ message|trans }}</div>
-    {% endfor %}
-{% endfor %}
-
-<a href="{{ path('app_admin_new') }}" class="btn btn-success">
-    {{ 'admin.actions.add'|trans }}
-</a>
-
-<table class="admin-table">
-    <thead>
-        <tr>
-            <th>{{ 'admin.table.image'|trans }}</th>
-            <th>{{ 'admin.table.name'|trans }}</th>
-            <th>{{ 'admin.table.price'|trans }}</th>
-            <th>{{ 'admin.table.stock'|trans }}</th>
-            <th>{{ 'admin.table.featured'|trans }}</th>
-            <th>{{ 'admin.table.actions'|trans }}</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {% for product in products %}
-            <tr>
-                <td>
-                    <img src="{{ asset('uploads/products/' ~ product.image) }}" width="60">
-                </td>
-
-                <td>{{ product.name }}</td>
-
-                <td>{{ product.price }} €</td>
-
-                <td>
-                    XS: {{ product.stockXS }} /
-                    S: {{ product.stockS }} /
-                    M: {{ product.stockM }} /
-                    L: {{ product.stockL }} /
-                    XL: {{ product.stockXL }}
-                </td>
-
-                <td>
-                    {% if product.isFeatured %}
-                        <span class="badge badge-success">{{ 'admin.featured.yes'|trans }}</span>
-                    {% else %}
-                        <span class="badge badge-secondary">{{ 'admin.featured.no'|trans }}</span>
-                    {% endif %}
-                </td>
-
-                <td>
-                    <a href="{{ path('app_admin_edit', {id: product.id}) }}" class="btn btn-sm btn-primary">
-                        {{ 'admin.actions.edit'|trans }}
-                    </a>
-
-                    <a href="{{ path('app_admin_toggle_featured', {id: product.id}) }}" class="btn btn-sm btn-warning">
-                        {% if product.isFeatured %}
-                            {{ 'admin.actions.unfeature'|trans }}
-                        {% else %}
-                            {% if featuredCount < 3 %}
-                                {{ 'admin.actions.feature'|trans }} 
-                            {% endif %}
-                        {% endif %}
-                    </a>
-
-                    <form method="post" action="{{ path('app_admin_delete', {id: product.id}) }}" style="display:inline-block">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete_product_' ~ product.id) }}">
-                        <button class="btn btn-sm btn-danger" onclick="return confirm('{{ 'admin.actions.confirm_delete'|trans }}')">
-                            {{ 'admin.actions.delete'|trans }}
-                        </button>
-                    </form>
-                </td>
-            </tr>
+    {# Messages flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">{{ message|trans }}</div>
         {% endfor %}
-    </tbody>
-</table>
+    {% endfor %}
 
+    <a href="{{ path('app_admin_new') }}" class="btn btn-success">
+        {{ 'admin.actions.add'|trans }}
+    </a>
+
+    {% if products is empty %}
+        <p>{{ 'admin.no_products'|trans }}</p>
+    {% else %}
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>{{ 'admin.table.image'|trans }}</th>
+                    <th>{{ 'admin.table.name'|trans }}</th>
+                    <th>{{ 'admin.table.price'|trans }}</th>
+                    <th>{{ 'admin.table.stock'|trans }}</th>
+                    <th>{{ 'admin.table.featured'|trans }}</th>
+                    <th>{{ 'admin.table.actions'|trans }}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for product in products %}
+                    <tr>
+                        <td>
+                            <img src="{{ asset('uploads/products/' ~ product.image) }}" width="60">
+                        </td>
+
+                        <td>{{ product.name }}</td>
+
+                        <td>{{ product.price }} €</td>
+
+                        <td>
+                            XS: {{ product.stockXS }} /
+                            S: {{ product.stockS }} /
+                            M: {{ product.stockM }} /
+                            L: {{ product.stockL }} /
+                            XL: {{ product.stockXL }}
+                        </td>
+
+                        <td>
+                            {% if product.isFeatured %}
+                                <span class="badge badge-success">{{ 'admin.featured.yes'|trans }}</span>
+                            {% else %}
+                                <span class="badge badge-secondary">{{ 'admin.featured.no'|trans }}</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <a href="{{ path('app_admin_edit', {id: product.id}) }}" class="btn btn-sm btn-primary">
+                                {{ 'admin.actions.edit'|trans }}
+                            </a>
+
+                            <a href="{{ path('app_admin_toggle_featured', {id: product.id}) }}" class="btn btn-sm btn-warning">
+                                {% if product.isFeatured %}
+                                    {{ 'admin.actions.unfeature'|trans }}
+                                {% else %}
+                                    {% if featuredCount < 3 %}
+                                        {{ 'admin.actions.feature'|trans }} 
+                                    {% endif %}
+                                {% endif %}
+                            </a>
+
+                            <form method="post" action="{{ path('app_admin_delete', {id: product.id}) }}" style="display:inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_product_' ~ product.id) }}">
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('{{ 'admin.actions.confirm_delete'|trans }}')">
+                                    {{ 'admin.actions.delete'|trans }}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

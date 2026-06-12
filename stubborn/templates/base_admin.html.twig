@@ -13,7 +13,7 @@
 			<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 		{% endblock %}
 
-		{% block javascripts %}
+		{% block javascripts_head %}
 			{% block importmap %}
 				{{ importmap('app') }}
 			{% endblock %}
@@ -44,5 +44,7 @@
 		</main>
 
 		{% include 'partials/_footer.html.twig' %}
+	
+		{% block javascripts_body %}{% endblock %}
 	</body>
 </html>

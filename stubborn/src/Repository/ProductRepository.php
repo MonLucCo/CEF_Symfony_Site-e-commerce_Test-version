@@ -39,6 +39,20 @@ class ProductRepository extends ServiceEntityRepository
         return $this->count(['isFeatured' => true]);
     }
 
+    /**
+     * @return Product[] Returns an array of featured Product objects, limited to a certain number
+     */
+    public function findFeatured(int $limit = Product::MAX_FEATURED): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isFeatured = true')
+            ->orderBy('p.price', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

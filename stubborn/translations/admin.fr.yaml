@@ -1,5 +1,14 @@
 admin:
   welcome: "Bienvenue ! Back-office de Stubborn"
+  no_products: "Aucun produit trouvé."
+
+  current_image:
+    legend: "Image actuelle"
+    none: "Aucune image disponible"
+  new_image:
+    legend: "Nouvelle image"
+    preview: "Prévisualisation"
+    clear: "Effacer la sélection"
 
   title: "Back-office"
   list_title: "Liste des produits"

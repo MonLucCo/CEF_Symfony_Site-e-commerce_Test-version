@@ -9,7 +9,7 @@
 
 	<div class="product-details">
 		<img
-		src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
+		src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
 
 		{# Formulaire permettant de sélectionner la taille du sweat-shirt, et de l'ajouter au panier #}
 		<form action="{{ path('app_cart_add', { id: product.id, size: 'SIZE_PLACEHOLDER' }) }}" method="post" class="size-form" onsubmit="this.action = this.action.replace('SIZE_PLACEHOLDER', document.getElementById('size').value)">

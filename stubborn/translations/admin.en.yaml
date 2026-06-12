@@ -1,5 +1,14 @@
 admin:
   welcome: "Welcome! Stubborn admin panel"
+  no_products: "No products found."
+
+  current_image:
+    legend: "Current image"
+    none: "No image available"
+  new_image:
+    legend: "New image"
+    preview: "Preview"
+    clear: "Clear selection"
 
   title: "Back-office"
   list_title: "List of products"
