@@ -5,21 +5,31 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ 'order.cancel.title'|trans }}</h1>
-	<h2>{{ 'order.cancel.subtitle'|trans }}</h2>
 
-	<p>{{ 'order.cancel.message'|trans }}</p>
+	<section class="order-container">
 
-	<p>
-		<a href="{{ path('app_order_checkout') }}">{{ 'order.cancel.retry'|trans }}</a>
-	</p>
+		<h1>{{ 'order.cancel.title'|trans }}</h1>
+		<h2>{{ 'order.cancel.subtitle'|trans }}</h2>
 
-	<p>
-		<a href="{{ path('app_cart_index') }}">{{ 'order.cancel.back_cart'|trans }}</a>
-	</p>
+		<p>{{ 'order.cancel.message'|trans }}</p>
 
-	<p>
-		<a href="{{ path('app_home') }}">{{ 'order.cancel.back_home'|trans }}</a>
-	</p>
+		<div class="order-actions">
+			<div class="order-action-left">
+				<p>
+					<a href="{{ path('app_cart_index') }}" class="btn-secondary">{{ 'order.cancel.back_cart'|trans }}</a>
+				</p>
+				<p>
+					<a href="{{ path('app_home') }}" class="btn-secondary">{{ 'order.cancel.back_home'|trans }}</a>
+				</p>
+			</div>
+
+			<div class="order-actions-rigth">
+				<p>
+					<a href="{{ path('app_order_checkout') }}" class="btn-primary">{{ 'order.cancel.retry'|trans }}</a>
+				</p>
+			</div>
+		</div>
+
+	</section>
 
 {% endblock %}
