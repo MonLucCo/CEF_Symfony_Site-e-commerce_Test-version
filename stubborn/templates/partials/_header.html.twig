@@ -1,5 +1,5 @@
 <header>
-	<nav>
+	<nav class="nav">
 		<ul>
 			<li>
 				<a href="{{ path('app_home') }}" class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}">
@@ -48,5 +48,8 @@
 				</li>
 			{% endif %}
 		</ul>
+
+		{# Switch de langue (étape 4) #}
+		{# <div class="lang-switch"> ... </div> #}
 	</nav>
 </header>

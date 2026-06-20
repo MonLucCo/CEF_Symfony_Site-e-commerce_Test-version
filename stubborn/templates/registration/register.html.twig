@@ -1,23 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'register.title'|trans }}{% endblock %}
+{% block title %}
+	{{ 'register.title'|trans }}
+{% endblock %}
 
 {% block body %}
-    <h1>{{ 'register.title'|trans }}</h1>
+	<section class="form-container">
+		<h1>{{ 'register.title'|trans }}</h1>
 
-    {{ form_errors(registrationForm) }}
+		{{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
+		{{ form_start(registrationForm) }}
+		<section class="form-group">
+			{{ form_row(registrationForm.name) }}
 
-        {{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.email) }}
 
-        {{ form_row(registrationForm.plainPassword) }}
+			{{ form_row(registrationForm.plainPassword) }}
 
-        {{ form_row(registrationForm.deliveryAddress) }}
+			{{ form_row(registrationForm.deliveryAddress) }}
+		</section>
 
-        <button type="submit" class="btn">
-            {{ 'register.submit'|trans }}
-        </button>
-    {{ form_end(registrationForm) }}
+		<section class="form-action">
+			<button type="submit" class="btn-primary">
+				{{ 'register.submit'|trans }}
+			</button>
+		</section>
+		{{ form_end(registrationForm) }}
+	</section>
 {% endblock %}

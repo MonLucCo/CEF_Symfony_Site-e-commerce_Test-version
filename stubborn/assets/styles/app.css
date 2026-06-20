@@ -6,6 +6,7 @@
     --color-primary-dark: #2F5A87;
     --color-secondary: #E8EEF5;
     --color-text: #222222;
+    --color-text-danger: #B30000;
     --color-border: #DDDDDD;
     --color-background: #FAFAFA;
     --color-table-row-alt: #F2F6FA;
@@ -40,6 +41,11 @@ footer {
 main {
     max-width: 900px;
     margin: 2rem auto;
+}
+
+section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 /* ===========================
@@ -192,6 +198,20 @@ form {
     gap: 1rem;
 }
 
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
 label {
     font-weight: 600;
 }
@@ -201,6 +221,12 @@ select {
     padding: 0.5rem;
     border: 1px solid var(--color-border);
     border-radius: 3px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
 }
 
 /* ===========================
@@ -248,4 +274,11 @@ table td {
 footer p {
     margin: 0.3rem 0;
     font-size: 0.9rem;
+}
+
+/* ===========================
+   TEXT
+=========================== */
+.text-danger {
+    color: var(--color-text-danger)
 }
