@@ -1,55 +1,57 @@
 <header>
-	<nav class="nav">
-		<ul>
-			<li>
-				<a href="{{ path('app_home') }}" class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}">
-					{{ 'menu.home'|trans }}
-				</a>
-			</li>
-
-			{% if app.user %}
+	<div class="container">
+		<nav class="nav">
+			<ul>
 				<li>
-					<a href="{{ path('app_products') }}" class="{% if app.request.attributes.get('_route') starts with 'app_products' or app.request.attributes.get('_route') starts with 'app_product' %}active{% endif %}">
-						{{ 'menu.products'|trans }}
+					<a href="{{ path('app_home') }}" class="{% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}">
+						{{ 'menu.home'|trans }}
 					</a>
 				</li>
 
-				<li>
-					<a href="{{ path('app_cart_index') }}" class="{% if app.request.attributes.get('_route') starts with 'app_cart' %}active{% endif %}">
-						{{ 'menu.cart'|trans }}
-					</a>
-				</li>
-
-				{% if 'ROLE_ADMIN' in app.user.roles %}
+				{% if app.user %}
 					<li>
-						<a href="{{ path('app_admin') }}" class="{% if app.request.attributes.get('_route') starts with 'app_admin' %}active{% endif %}">
-							{{ 'menu.admin'|trans }}
+						<a href="{{ path('app_products') }}" class="{% if app.request.attributes.get('_route') starts with 'app_products' or app.request.attributes.get('_route') starts with 'app_product' %}active{% endif %}">
+							{{ 'menu.products'|trans }}
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ path('app_cart_index') }}" class="{% if app.request.attributes.get('_route') starts with 'app_cart' %}active{% endif %}">
+							{{ 'menu.cart'|trans }}
+						</a>
+					</li>
+
+					{% if 'ROLE_ADMIN' in app.user.roles %}
+						<li>
+							<a href="{{ path('app_admin') }}" class="{% if app.request.attributes.get('_route') starts with 'app_admin' %}active{% endif %}">
+								{{ 'menu.admin'|trans }}
+							</a>
+						</li>
+					{% endif %}
+
+					<li>
+						<a href="{{ path('app_logout') }}">
+							{{ 'menu.logout'|trans }}
+						</a>
+					</li>
+
+				{% else %}
+					<li>
+						<a href="{{ path('app_register') }}" class="{% if app.request.attributes.get('_route') starts with 'app_register' %}active{% endif %}">
+							{{ 'menu.register'|trans }}
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ path('app_login') }}" class="{% if app.request.attributes.get('_route') starts with 'app_login' %}active{% endif %}">
+							{{ 'menu.login'|trans }}
 						</a>
 					</li>
 				{% endif %}
+			</ul>
 
-				<li>
-					<a href="{{ path('app_logout') }}">
-						{{ 'menu.logout'|trans }}
-					</a>
-				</li>
-
-			{% else %}
-				<li>
-					<a href="{{ path('app_register') }}" class="{% if app.request.attributes.get('_route') starts with 'app_register' %}active{% endif %}">
-						{{ 'menu.register'|trans }}
-					</a>
-				</li>
-
-				<li>
-					<a href="{{ path('app_login') }}" class="{% if app.request.attributes.get('_route') starts with 'app_login' %}active{% endif %}">
-						{{ 'menu.login'|trans }}
-					</a>
-				</li>
-			{% endif %}
-		</ul>
-
-		{# Switch de langue (étape 4) #}
-		{# <div class="lang-switch"> ... </div> #}
-	</nav>
+			{# Switch de langue (étape 4) #}
+			{# <div class="lang-switch"> ... </div> #}
+		</nav>
+	</div>
 </header>

@@ -28,21 +28,23 @@
 	<body>
 		{% include 'partials/_header.html.twig' %}
 
-		<section class="flash-container">
-			{% block flash_messages %}
-				{% for label, messages in app.flashes %}
-					{% for message in messages %}
-						<div class="flash flash-{{ label }}">
-							{{ message|trans }}
-						</div>
+		<div class="container">
+			<section class="flash-container">
+				{% block flash_messages %}
+					{% for label, messages in app.flashes %}
+						{% for message in messages %}
+							<div class="flash flash-{{ label }}">
+								{{ message|trans }}
+							</div>
+						{% endfor %}
 					{% endfor %}
-				{% endfor %}
-			{% endblock %}
-		</section>
+				{% endblock %}
+			</section>
 
-		<main>
-			{% block body %}{% endblock %}
-		</main>
+			<main>
+				{% block body %}{% endblock %}
+			</main>
+		</div>
 
 		{% include 'partials/_footer.html.twig' %}
 

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil — Stubborn
+{% block title %}
+	Accueil — Stubborn
 {% endblock %}
 
 {% block body %}
@@ -17,20 +18,22 @@
 	</section>
 
 	{% if featured %}
-		<section class="featured-products">
+		<section class="home-featured">
 			<h2>{{ 'home.featured.title'|trans }}</h2>
 
-			<div class="featured-grid">
+			<div class="grid-featured">
 				{% for product in featured %}
-					<div class="product-card">
-						<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
+					<div class="card">
+						<div class="image-wrapper">
+							<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
+						</div>
 
 						<h3>{{ product.name }}</h3>
 						<p>{{ product.price }}
 							€</p>
 
 						{% if app.user %}
-							<a class="btn" href="{{ path('app_product_show', {id: product.id}) }}">
+							<a class="btn-primary" href="{{ path('app_product_show', {id: product.id}) }}">
 								{{ 'home.featured.view'|trans }}
 								>
 							</a>

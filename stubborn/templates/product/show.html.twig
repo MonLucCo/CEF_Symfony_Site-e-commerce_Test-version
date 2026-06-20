@@ -5,49 +5,54 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ product.name }}</h1>
+	<section class="form-container">
+		<h1>{{ product.name }}</h1>
 
-	<div class="product-details">
-		<img
-		src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
+		<div class="image-wrapper-large">
+			<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
+		</div>
 
 		{# Formulaire permettant de sélectionner la taille du sweat-shirt, et de l'ajouter au panier #}
-		<form action="{{ path('app_cart_add', { id: product.id, size: 'SIZE_PLACEHOLDER' }) }}" method="post" class="size-form" onsubmit="this.action = this.action.replace('SIZE_PLACEHOLDER', document.getElementById('size').value)">
-			<label for="size">{{ 'product.size'|trans }}</label>
-			<select name="size" id="size" class="form-select" required>
-				<option value="" disabled selected>{{ 'product.size.choose'|trans }}</option>
-				{% for size in constant('App\\Entity\\Product::SIZES') %}
-					{% set qty = product.getStockForSize(size) %}
+		<form action="{{ path('app_cart_add', { id: product.id, size: 'SIZE_PLACEHOLDER' }) }}" method="post" onsubmit="this.action = this.action.replace('SIZE_PLACEHOLDER', document.getElementById('size').value)">
+			<div class="form-group">
+				<label for="size">{{ 'product.size'|trans }}</label>
+				<select name="size" id="size" required>
+					<option value="" disabled selected>{{ 'product.size.choose'|trans }}</option>
+					{% for size in constant('App\\Entity\\Product::SIZES') %}
+						{% set qty = product.getStockForSize(size) %}
 
-					<option value="{{ size }}" {% if qty == 0 %} disabled {% endif %}>
-						{{ size }}
-						{% if qty == 0 %}({{ 'cart.status.out_of_stock'|trans }})
-						{% else %}
-							({{ qty }}
-							{{ 'cart.status.in_stock'|trans }})
-						{% endif %}
-					</option>
-				{% endfor %}
-			</select>
+						<option value="{{ size }}" {% if qty == 0 %} disabled {% endif %}>
+							{{ size }}
+							{% if qty == 0 %}({{ 'cart.status.out_of_stock'|trans }})
+							{% else %}
+								({{ qty }}
+								{{ 'cart.status.in_stock'|trans }})
+							{% endif %}
+						</option>
+					{% endfor %}
+				</select>
+			</div>
 
 			{# Token CSRF et redirection pour le panier #}
 			<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
 			<input type="hidden" name="redirectTo" value="{{ app.request.uri }}">
 
-			<button type="submit" class="btn">{{ 'product.add_to_cart'|trans }}</button>
+			<button type="submit" class="btn-primary">{{ 'product.add_to_cart'|trans }}</button>
 		</form>
 
-		<div class="info">
-			<p>
-				<strong>{{ 'product.price'|trans }}
-					:</strong>
-				{{ product.price }}
-				€</p>
+		<section>
+			<div class="image-info">
+				<p>
+					<strong>{{ 'product.price'|trans }}
+						:</strong>
+					{{ product.price }}
+					€</p>
 
-			<p>
-				<a href="{{ path('app_products') }}" class="back-link">
-					{{ 'product.back_to_products'|trans }}</a>
-			</p>
-		</div>
-	</div>
+				<p>
+					<a href="{{ path('app_products') }}" class="btn-secondary">
+						{{ 'product.back_to_products'|trans }}</a>
+				</p>
+			</div>
+		</section>
+	</section>
 {% endblock %}

@@ -5,33 +5,37 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ 'products.title'|trans }}</h1>
+	<section>
+		<h1>{{ 'products.title'|trans }}</h1>
 
-	<form method="get" class="filter-form">
-		<label for="price">{{ 'products.filter.label'|trans }}</label>
-		<select name="price" id="price" onchange="this.form.submit()">
-			<option value="">{{ 'products.filter.all'|trans }}</option>
-			<option value="10-29" {{ filter == '10-29' ? 'selected' }}>{{ 'products.filter.price_10_29'|trans }}</option>
-			<option value="29-35" {{ filter == '29-35' ? 'selected' }}>{{ 'products.filter.price_29_35'|trans }}</option>
-			<option value="35-50" {{ filter == '35-50' ? 'selected' }}>{{ 'products.filter.price_35_50'|trans }}</option>
-		</select>
-	</form>
+		<form method="get" class="form-group">
+			<label for="price">{{ 'products.filter.label'|trans }}</label>
+			<select name="price" id="price" onchange="this.form.submit()">
+				<option value="">{{ 'products.filter.all'|trans }}</option>
+				<option value="10-29" {{ filter == '10-29' ? 'selected' }}>{{ 'products.filter.price_10_29'|trans }}</option>
+				<option value="29-35" {{ filter == '29-35' ? 'selected' }}>{{ 'products.filter.price_29_35'|trans }}</option>
+				<option value="35-50" {{ filter == '35-50' ? 'selected' }}>{{ 'products.filter.price_35_50'|trans }}</option>
+			</select>
+		</form>
+	</section>
 
-	<div class="products-grid">
+	<section>
 		{% if products is empty %}
 			<p>{{ 'products.empty'|trans }}</p>
 		{% else %}
-			<div class="products-grid">
+			<div class="grid grid-3">
 				{% for product in products %}
-					<article class="product-card">
-						<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
+					<article class="card">
+						<div class="image-wrapper">
+							<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}">
+						</div>
 						<h2>{{ product.name }}</h2>
 						<p>{{ product.price }}
 							€</p>
-						<a class="btn" href="{{ path('app_product_show', { id: product.id }) }}">{{ 'products.view'|trans }}</a>
+						<a class="btn-primary" href="{{ path('app_product_show', { id: product.id }) }}">{{ 'products.view'|trans }}</a>
 					</article>
 				{% endfor %}
 			</div>
 		{% endif %}
-	</div>
+	</section>
 {% endblock %}

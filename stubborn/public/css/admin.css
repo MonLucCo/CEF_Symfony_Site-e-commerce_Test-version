@@ -21,6 +21,11 @@ body {
     font-family: system-ui, sans-serif;
     background: var(--color-background);
     color: var(--color-text);
+    padding: 0;
+}
+
+body .container {
+    margin: 0 auto;
     padding: 0 1rem;
 }
 
@@ -47,6 +52,7 @@ nav a {
     text-decoration: none;
     color: var(--color-text);
     font-weight: 500;
+    font-size: 1.25rem;
 }
 
 nav a.active {

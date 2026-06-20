@@ -26,6 +26,11 @@ body {
     line-height: 1.6;
     background: var(--color-background);
     color: var(--color-text);
+    padding: 0;
+}
+
+body .container {
+    margin: 0 auto;
     padding: 0 1rem;
 }
 
@@ -34,8 +39,27 @@ body {
 =========================== */
 header,
 footer {
+    width: 100%;
+    background: var(--color-secondary);
     padding: 1rem 0;
     text-align: center;
+}
+
+header {
+    border-bottom: 3px solid var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    border-top: 3px solid var(--color-primary);
+    margin-top: 0.5rem;
+}
+
+header .container,
+footer .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 main {
@@ -46,6 +70,11 @@ main {
 section {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+footer p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
 }
 
 /* ===========================
@@ -63,6 +92,7 @@ nav a {
     text-decoration: none;
     color: var(--color-text);
     font-weight: 500;
+    font-size: 1.25rem;
 }
 
 nav a.active {
@@ -166,10 +196,18 @@ button:hover {
 .grid {
     display: grid;
     gap: 1.5rem;
+    justify-content: center;
 }
 
 .grid-3 {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+}
+
+.grid-featured {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
+    justify-content: center;
 }
 
 /* ===========================
@@ -181,12 +219,49 @@ button:hover {
     border: 1px solid var(--color-border);
     border-radius: 4px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.card img {
+/* Zone image fixe */
+.card .image-wrapper {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Image responsive */
+.card .image-wrapper img {
+    max-height: 100%;
     max-width: 100%;
-    height: auto;
-    margin-bottom: 0.8rem;
+    object-fit: contain;
+}
+
+
+/* ===========================
+   IMAGE PRODUIT
+=========================== */
+.image-wrapper-large {
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-wrapper-large img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.image-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 /* ===========================
@@ -269,16 +344,58 @@ table td {
 }
 
 /* ===========================
-   FOOTER
-=========================== */
-footer p {
-    margin: 0.3rem 0;
-    font-size: 0.9rem;
-}
-
-/* ===========================
    TEXT
 =========================== */
 .text-danger {
     color: var(--color-text-danger)
+}
+
+/* ===========================
+   Page ACCUEIL
+=========================== */
+.home-hero {
+    background: var(--color-secondary);
+    padding: 3rem 1rem;
+    text-align: center;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+}
+
+.home-hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.home-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.home-about {
+    background: #fff;
+    padding: 2rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    margin-bottom: 2rem;
+}
+
+.home-about h2 {
+    margin-bottom: 0.5rem;
+}
+
+.home-about p {
+    opacity: 0.9;
+}
+
+.home-featured {
+    background: var(--color-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.home-featured h2 {
+    text-align: center;
+    margin-bottom: 1rem;
 }
