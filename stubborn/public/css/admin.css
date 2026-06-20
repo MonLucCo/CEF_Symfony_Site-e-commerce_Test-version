@@ -83,6 +83,16 @@ nav a:hover {
     border: 1px solid #FF9999;
 }
 
+.flash-warning {
+    background: #FFF4CC;
+    border: 1px solid #E6C766;
+}
+
+.flash-info {
+    background: #E6F0FF;
+    border: 1px solid #99B8E6;
+}
+
 /* TABLE */
 table {
     width: 100%;
