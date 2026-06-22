@@ -2,87 +2,102 @@
 
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}{{ 'admin.add_title'|trans }}{% endblock %}
+{% block title %}
+	{{ 'admin.add_title'|trans }}
+{% endblock %}
 
 {% block body %}
-<h1>{{ 'admin.add_title'|trans }}</h1>
+	<section class="admin-container">
+		<h1>{{ 'admin.add_title'|trans }}</h1>
 
-{{ form_start(form) }}
+		{{ form_start(form) }}
 
-    {{ form_row(form.name) }}
-    {{ form_row(form.price) }}
+		<div class=" admin-layout">
+			<div class="admin-left">
 
-    <fieldset class="mt-4 p-3 border rounded">
-        <legend class="fw-bold">{{ 'admin.new_image.legend'|trans }}</legend>
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'product.form.required.legend'|trans({}, 'forms') }}</legend>
+					{{ form_row(form.name) }}
+					{{ form_row(form.price) }}
+				</fieldset>
 
-        {{ form_row(form.imageFile) }}
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'product.form.stock.legend'|trans({}, 'forms') }}</legend>
 
-        <button type="button" id="clear-file" class="btn btn-secondary btn-sm mt-2">
-            {{ 'admin.new_image.clear'|trans }}
-        </button>
+					<p>{{ 'product.form.stock.help'|trans({}, 'forms') }}</p>
 
-        <div id="preview" class="mt-3" style="display:none;">
-            <p class="form-label">{{ 'admin.new_image.preview'|trans }}</p>
-            <img id="preview-img"
-                style="max-width: 200px; height: auto; border: 1px solid #ccc; padding: 4px;">
-        </div>
-    </fieldset>
+					{{ form_row(form.stockXS) }}
+					{{ form_row(form.stockS) }}
+					{{ form_row(form.stockM) }}
+					{{ form_row(form.stockL) }}
+					{{ form_row(form.stockXL) }}
+				</fieldset>
+			</div>
 
-    <fieldset class="mt-4 p-3 border rounded">
-        <legend class="fw-bold">{{ 'product.form.stock.legend'|trans({}, 'forms') }}</legend>
+			<div class="admin-right admin-right-dispo">
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'admin.new_image.legend'|trans }}</legend>
 
-        <p class="form-text text-muted">
-            {{ 'product.form.stock.help'|trans({}, 'forms') }}
-        </p>
+					{{ form_row(form.imageFile) }}
 
-        {{ form_row(form.stockXS) }}
-        {{ form_row(form.stockS) }}
-        {{ form_row(form.stockM) }}
-        {{ form_row(form.stockL) }}
-        {{ form_row(form.stockXL) }}
-    </fieldset>
+					<button type="button" id="clear-file" class="btn-secondary">
+						{{ 'admin.new_image.clear'|trans }}
+					</button>
 
-    <button class="btn btn-success">{{ 'admin.actions.add'|trans }}</button>
+					<div id="preview" style="display:none;">
+						<p class="form-label">{{ 'admin.new_image.preview'|trans }}</p>
+						<img id="preview-img" class="admin-image">
+					</div>
+				</fieldset>
 
-{{ form_end(form) }}
+				<section class="admin-actions">
+					<a href="{{ path('app_admin') }}" class="btn-secondary">
+						{{ 'admin.actions.back'|trans }}
+					</a>
+					<button class="btn-primary">{{ 'admin.actions.add'|trans }}</button>
+				</section>
+			</div>
+		</div>
 
-<a href="{{ path('app_admin') }}" class="btn btn-secondary">
-    {{ 'admin.actions.back'|trans }}
-</a>
+		{{ form_end(form) }}
+	</section>
 {% endblock %}
 
 {% block javascripts_body %}
-<script>
-    document.addEventListener('turbo:load', () => {
-        const input = document.querySelector('input[type="file"]');
-        const preview = document.getElementById('preview');
-        const previewImg = document.getElementById('preview-img');
-        const clearBtn = document.getElementById('clear-file');
+	<script>
+		document.addEventListener('turbo:load', () => {
+const input = document.querySelector('input[type="file"]');
+const preview = document.getElementById('preview');
+const previewImg = document.getElementById('preview-img');
+const clearBtn = document.getElementById('clear-file');
 
-        if (!input) return;
+if (! input) 
+return;
 
-        // Masquer le bouton au chargement
-        clearBtn.style.display = 'none';
 
-        input.addEventListener('change', e => {
-            const file = e.target.files[0];
 
-            if (!file) {
-                preview.style.display = 'none';
-                clearBtn.style.display = 'none';
-                return;
-            }
+// Masquer le bouton au chargement
+clearBtn.style.display = 'none';
 
-            previewImg.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-            clearBtn.style.display = 'inline-block';
-        });
+input.addEventListener('change', e => {
+const file = e.target.files[0];
 
-        clearBtn.addEventListener('click', () => {
-            input.value = "";
-            preview.style.display = 'none';
-            clearBtn.style.display = 'none';
-        });
-    });
-</script>
+if (! file) {
+preview.style.display = 'none';
+clearBtn.style.display = 'none';
+return;
+}
+
+previewImg.src = URL.createObjectURL(file);
+preview.style.display = 'block';
+clearBtn.style.display = 'inline-block';
+});
+
+clearBtn.addEventListener('click', () => {
+input.value = "";
+preview.style.display = 'none';
+clearBtn.style.display = 'none';
+});
+});
+	</script>
 {% endblock %}

@@ -19,7 +19,8 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/index.html.twig', [
             'products' => $repo->findAll(),
-            'featuredCount' => $repo->count(['isFeatured' => true]),
+            'isMaxFeatured' => $repo->isMaxFeaturedReached(),
+            'sizes' => Product::SIZES,
         ]);
     }
 

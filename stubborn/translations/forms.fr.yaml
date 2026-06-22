@@ -20,3 +20,5 @@ product:
       xl: "Stock XL"
       legend: "Stock par taille"
       help: "Les champs de stock représentent la quantité totale disponible pour chaque taille. Si vous laissez un champ vide, la valeur 0 sera utilisée."
+    required:
+      legend: "Description requise"
