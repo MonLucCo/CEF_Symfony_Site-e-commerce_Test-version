@@ -63,6 +63,12 @@ class EmailVerifier
             $user->getEmail()
         );
 
+        // 🔒 Empêcher la vérification d'un administrateur
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+            return ! ($user->isVerified());
+        }
+
+        // réaliser la vérification
         $user->setIsVerified(true);
         $this->entityManager->flush();
 

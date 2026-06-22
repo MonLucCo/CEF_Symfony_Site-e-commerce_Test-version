@@ -75,6 +75,9 @@ verify:
   error_login_required: "Votre lien est invalide. Veuillez vous connecter pour demander un nouveau lien."
   error_register_required: "Ce lien n'est pas valide. Veuillez créer un compte."
 
+  admin_test_email_sent: "Email envoyé pour test. Les comptes administrateurs ne peuvent pas être vérifiés."
+  admin_test_link_used: "Lien de vérification utilisé pour test. Les comptes administrateurs ne peuvent pas être vérifiés."
+
 # ===========================
 # SECTION : Error pages
 # ===========================
@@ -118,11 +121,15 @@ cart:
     continue: "Continuer mes achats"
     clear: "Vider le panier"
     checkout: "Finaliser ma commande"
+    resend_verification: "Renvoyer l’email d’inscription"
   status:
     in_stock: "en stock"
     out_of_stock: "Rupture de stock"
   csrf:
     invalid: "Token CSRF invalide pour l’action demandée"
+  info:
+    no_order_admin: "Pas de commande pour un Administrateur. Veuillez utiliser un compte personnel."
+    verify_before_order: "Vous devez vérifier votre inscription par email avant de pouvoir effectuer une commande."
 
 # ===========================
 # SECTION : Home page
