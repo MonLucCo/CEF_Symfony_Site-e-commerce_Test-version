@@ -17,6 +17,21 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return bool Returns a logic status about featured products
+     */
+    public function isMaxFeaturedReached(): bool
+    {
+        $count = $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->where('p.isFeatured = :featured')
+            ->setParameter('featured', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return ! ($count < Product::MAX_FEATURED);
+    }
+
+    /**
      * @return Product[] Returns an array of Product objects
      */
     public function findByPriceRange(float $min, float $max): array
@@ -30,6 +45,28 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return int Returns the number of featured products
+     */
+    public function countFeatured(): int
+    {
+        return $this->count(['isFeatured' => true]);
+    }
+
+    /**
+     * @return Product[] Returns an array of featured Product objects, limited to a certain number
+     */
+    public function findFeatured(int $limit = Product::MAX_FEATURED): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isFeatured = true')
+            ->orderBy('p.price', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 
     //    /**
     //     * @return Product[] Returns an array of Product objects

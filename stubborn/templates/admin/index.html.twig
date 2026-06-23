@@ -1,0 +1,108 @@
+{% trans_default_domain 'admin' %}
+
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}
+	{{ 'admin.title'|trans }}
+{% endblock %}
+
+{% block body %}
+	<section class="admin-container">
+		<h1>{{ 'admin.list_title'|trans }}</h1>
+
+		{# Messages flash #}
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="flash flash-{{ label }}">{{ message|trans }}</div>
+			{% endfor %}
+		{% endfor %}
+
+		<a href="{{ path('app_admin_new') }}" class="btn-primary">
+			{{ 'admin.actions.add'|trans }}
+		</a>
+
+		{% if products is empty %}
+			<p>{{ 'admin.no_products'|trans }}</p>
+		{% else %}
+			<div class="admin-table-wrapper">
+				<table class="admin-table">
+					<thead>
+						<tr>
+							<th>{{ 'admin.table.image'|trans }}</th>
+							<th>{{ 'admin.table.name'|trans }}</th>
+							<th>{{ 'admin.table.price'|trans }}</th>
+							<th>{{ 'admin.table.stock'|trans }}</th>
+							<th>{{ 'admin.table.featured'|trans }}</th>
+							<th>{{ 'admin.table.actions'|trans }}</th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+						{% for product in products %}
+							<tr>
+								<td>
+									<img src="{{ asset('uploads/products/' ~ product.image) }}" width="60">
+								</td>
+
+								<td>{{ product.name }}</td>
+
+								<td>{{ product.price }}
+									€</td>
+
+								<td class="stock-column">
+									{% for size in sizes %}
+										<div>
+											{{ size }}
+											:
+											<span class="{{ product.getStockForSize(size) == 0 ? 'text-danger' : '' }}">
+												{{ product.getStockForSize(size) }}
+											</span>
+										</div>
+									{% endfor %}
+								</td>
+
+								<td>
+									{% if product.isFeatured %}
+										{# Produit mis en avant → badge vert → clic = retirer #}
+										<a href="{{ path('app_admin_toggle_featured', {id: product.id}) }}" class="badge badge-success">
+											{{ 'admin.featured.yes'|trans }}
+										</a>
+
+									{% else %}
+										{% if isMaxFeatured %}
+											{# Non mis en avant, quota atteint → badge gris → pas d’action #}
+											<span class="badge badge-secondary">
+												{{ 'admin.featured.no'|trans }}
+											</span>
+										{% else %}
+											{# Non mis en avant, quota disponible → badge jaune → clic = mettre en avant #}
+											<a href="{{ path('app_admin_toggle_featured', {id: product.id}) }}" class="badge badge-warning">
+												{{ 'admin.featured.no'|trans }}
+											</a>
+										{% endif %}
+									{% endif %}
+								</td>
+
+								<td>
+									<div class="admin-actions">
+										<a href="{{ path('app_admin_edit', {id: product.id}) }}" class="btn-primary">
+											{{ 'admin.actions.edit'|trans }}
+										</a>
+
+										<form method="post" action="{{ path('app_admin_delete', {id: product.id}) }}">
+											<input type="hidden" name="_token" value="{{ csrf_token('delete_product_' ~ product.id) }}">
+											<button class="btn-danger" onclick="return confirm('{{ 'admin.actions.confirm_delete'|trans }}')">
+												{{ 'admin.actions.delete'|trans }}
+											</button>
+										</form>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	</section>
+{% endblock %}

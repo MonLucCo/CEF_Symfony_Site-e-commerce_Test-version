@@ -5,108 +5,140 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ 'cart.title'|trans }}</h1>
 
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">{{ message }}</div>
-	{% endfor %}
-	{% for message in app.flashes('info') %}
-		<div class="alert alert-info">{{ message }}</div>
-	{% endfor %}
-	{% for message in app.flashes('warning') %}
-		<div class="alert alert-warning">{{ message }}</div>
-	{% endfor %}
+	<section class="cart-container">
 
-	{% if items is empty %}
-		<p class="text-center">{{ 'cart.empty'|trans }}</p>
-	{% else %}
-		<table class="table">
-			<thead>
-				<tr>
-					<th>{{ 'cart.product.name'|trans }}</th>
-					<th>{{ 'cart.product.size'|trans }}</th>
-					<th>{{ 'cart.product.price'|trans }}</th>
-					<th>{{ 'cart.product.quantity'|trans }}</th>
-					<th>{{ 'cart.product.total'|trans }}</th>
-					<th>{{ 'cart.actions.name'|trans }}</th>
-					<th>{{ 'cart.product.stock'|trans }}</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for item in items %}
-					<tr>
-						<td>{{ item.product.name }}</td>
-						<td>{{ item.size }}</td>
-						<td>{{ item.price|number_format(2, ',', ' ') }}
-							€</td>
-						<td>
-							<div class="cart-qty">
-								<form action="{{ path('app_cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
-									<input type="hidden" name="_token" value="{{ csrf_token('app_cart_decrease') }}">
-									<button class="btn btn-sm btn-outline-secondary">−</button>
-								</form>
+		<h1>{{ 'cart.title'|trans }}</h1>
 
-								<span class="mx-2">{{ item.quantity }}</span>
+		{% for message in app.flashes('success') %}
+			<div class="flash flash-success">{{ message }}</div>
+		{% endfor %}
+		{% for message in app.flashes('info') %}
+			<div class="flash flash-info">{{ message }}</div>
+		{% endfor %}
+		{% for message in app.flashes('warning') %}
+			<div class="flash flash-warning">{{ message }}</div>
+		{% endfor %}
 
-								<form action="{{ path('app_cart_add', {id: item.product.id, size: item.size}) }}" method="post">
-									<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
-									<button class="btn btn-sm btn-outline-secondary">+</button>
-								</form>
-							</div>
-						</td>
-						<td>{{ item.total|number_format(2, ',', ' ') }}
-							€</td>
-						<td>
-							<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
-								<input type="hidden" name="_token" value="{{ csrf_token('app_cart_remove') }}">
-								<button class="btn btn-danger btn-sm">
-									{{ 'cart.actions.remove'|trans }}
-								</button>
-							</form>
-						</td>
-						<td>
-							{% set stock = item.product.getStockForSize(item.size) %}
-							{% if stock > 0 %}
-								{{ stock }}
-								{{ 'cart.status.in_stock'|trans }}
-							{% else %}
-								<span class="text-danger">{{ 'cart.status.out_of_stock'|trans }}</span>
-							{% endif %}
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+		{% if items is empty %}
+			<p class="cart-empty">{{ 'cart.empty'|trans }}</p>
+		{% else %}
+			<div class="cart-table-wrapper">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>{{ 'cart.product.name'|trans }}</th>
+							<th>{{ 'cart.product.size'|trans }}</th>
+							<th>{{ 'cart.product.price'|trans }}</th>
+							<th>{{ 'cart.product.quantity'|trans }}</th>
+							<th>{{ 'cart.product.total'|trans }}</th>
+							<th>{{ 'cart.actions.name'|trans }}</th>
+							<th>{{ 'cart.product.stock'|trans }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+							<tr>
+								<td>{{ item.product.name }}</td>
+								<td>{{ item.size }}</td>
+								<td>{{ item.price|number_format(2, ',', ' ') }}
+									€</td>
+								<td>
+									<div class="cart-qty">
+										<form action="{{ path('app_cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
+											<input type="hidden" name="_token" value="{{ csrf_token('app_cart_decrease') }}">
+											<button class="btn-secondary">−</button>
+										</form>
 
-		<p class="text-end">
-			<strong>{{ 'cart.total'|trans }}
-				:
-				{{ total|number_format(2, ',', ' ') }}
-				€</strong>
-		</p>
-	{% endif %}
+										<span class="mx-2">{{ item.quantity }}</span>
 
-	<div class="cart-actions">
+										<form action="{{ path('app_cart_add', {id: item.product.id, size: item.size}) }}" method="post">
+											<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
+											<button class="btn-secondary">+</button>
+										</form>
+									</div>
+								</td>
+								<td>{{ item.total|number_format(2, ',', ' ') }}
+									€</td>
+								<td>
+									<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
+										<input type="hidden" name="_token" value="{{ csrf_token('app_cart_remove') }}">
+										<button class="btn-secondary">
+											{{ 'cart.actions.remove'|trans }}
+										</button>
+									</form>
+								</td>
+								<td>
+									{% set stock = item.product.getStockForSize(item.size) %}
+									{% if stock > 0 %}
+										{{ stock }}
+										{{ 'cart.status.in_stock'|trans }}
+									{% else %}
+										<span class="text-danger">{{ 'cart.status.out_of_stock'|trans }}</span>
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 
-		<a href="{{ path('app_products') }}" class="btn btn-secondary">
-			{{ 'cart.actions.continue'|trans }}
-		</a>
+			<p class="cart-total">
+				<strong>{{ 'cart.total'|trans }}
+					:
+					{{ total|number_format(2, ',', ' ') }}
+					€</strong>
+			</p>
+		{% endif %}
 
-		{% if items is not empty %}
-			<form action="{{ path('app_cart_clear') }}" method="post">
-				<input type="hidden" name="_token" value="{{ csrf_token('app_cart_clear') }}">
-				<button class="btn btn-warning">
-					{{ 'cart.actions.clear'|trans }}
-				</button>
-			</form>
+		<div class="cart-actions">
 
-			{% if is_granted('ROLE_USER') and is_granted('IS_VERIFIED') and not is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('app_order_checkout') }}" class="btn btn-primary">
+			<div class="cart-action-left">
+				<a href="{{ path('app_products') }}" class="btn-secondary">
+					{{ 'cart.actions.continue'|trans }}
+				</a>
+
+				{% if items is not empty %}
+					<form action="{{ path('app_cart_clear') }}" class="cart-clear" method="post">
+						<input type="hidden" name="_token" value="{{ csrf_token('app_cart_clear') }}">
+						<button class="btn-danger">
+							{{ 'cart.actions.clear'|trans }}
+						</button>
+					</form>
+				{% endif %}
+			</div>
+
+			{# --- CAS 1 : ADMIN --- #}
+			{% if items is not empty and is_granted('ROLE_ADMIN') %}
+				<p class="cart-info text-danger" style="text-align:center; max-width:260px;">
+					{{ 'cart.info.no_order_admin'|trans }}
+				</p>
+			{% endif %}
+
+			{# --- CAS 2 : USER NON VERIFIE --- #}
+			{% if items is not empty and is_granted('ROLE_USER') and not is_granted('IS_VERIFIED') %}
+				<div class="cart-info" style="text-align:center; max-width:260px;">
+					<p class="text-danger">
+						{{ 'cart.info.verify_before_order'|trans }}
+					</p>
+
+					<form action="{{ path('app_register_resend') }}" method="post">
+						<input type="hidden" name="_token" value="{{ csrf_token('app_register_resend') }}">
+						<button class="btn-secondary">
+							{{ 'cart.actions.resend_verification'|trans }}
+						</button>
+					</form>
+				</div>
+			{% endif %}
+
+			{# --- CAS 3 : USER VERIFIE (déjà existant) --- #}
+			{% if items is not empty and is_granted('ROLE_USER') and is_granted('IS_VERIFIED') and not is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('app_order_checkout') }}" class="btn-primary">
 					{{ 'cart.actions.checkout'|trans }}
 				</a>
 			{% endif %}
-		{% endif %}
+		</div>
 
-	</div>
+	</section>
 
 {% endblock %}

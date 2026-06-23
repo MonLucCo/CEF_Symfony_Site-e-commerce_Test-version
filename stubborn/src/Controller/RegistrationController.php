@@ -90,6 +90,11 @@ class RegistrationController extends AbstractController
                 $this->addFlash('info', 'verify.already_verified');
             }
 
+            // Cas ADMIN : informer que son compte admin n'est pas enregistré
+            if ($this->isGranted('ROLE_ADMIN')) {
+                $this->addFlash('warning', 'verify.admin_test_link_used');
+            }
+
             return $this->redirectToRoute('app_home');
         } catch (VerifyEmailExceptionInterface $e) {
             // On considère le lien comme compromis / invalide / expiré
@@ -107,11 +112,23 @@ class RegistrationController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        // Cas ADMIN : autoriser l’envoi mais message spécifique
+        if ($this->isGranted('ROLE_ADMIN')) {
+            if ($this->sendConfirmationEmail($user)) {
+                $this->addFlash('warning', 'verify.admin_test_email_sent');
+            } else {
+                $this->addFlash('error', 'register.email.error');
+            }
+            return $this->redirectToRoute('app_home');
+        }
+
+        // Cas USER déjà vérifié
         if ($user->isVerified()) {
             $this->addFlash('info', 'verify.already_verified');
             return $this->redirectToRoute('app_home');
         }
 
+        // Cas USER non vérifié
         if ($this->sendConfirmationEmail($user)) {
             $this->addFlash('success', 'register.email.resent');
         } else {

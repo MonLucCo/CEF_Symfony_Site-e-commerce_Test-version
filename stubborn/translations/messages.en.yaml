@@ -75,6 +75,9 @@ verify:
   error_login_required: "Your link is invalid. Please log in to request a new link."
   error_register_required: "This link is not valid. Please create an account."
 
+  admin_test_email_sent: "Test email sent. Administrator accounts cannot be verified."
+  admin_test_link_used: "Verification link used for testing. Administrator accounts cannot be verified."
+
 # ===========================
 # SECTION : Error pages
 # ===========================
@@ -118,11 +121,15 @@ cart:
     continue: "Continue shopping"
     clear: "Clear cart"
     checkout: "Proceed to checkout"
+    resend_verification: "Resend verification email"
   status:
     in_stock: "in stock"
     out_of_stock: "Out of stock"
   csrf:
     invalid: "Invalid CSRF token for the requested action"
+  info:
+    no_order_admin: "Administrators cannot place orders. Please use a personal account."
+    verify_before_order: "You must verify your email before placing an order."
 
 # ===========================
 # SECTION : Home page

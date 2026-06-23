@@ -15,6 +15,11 @@ class Product
      */
     public const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
 
+    /**
+     * Constante pour le nombre maximum de produits mis en avant
+     */
+    public const MAX_FEATURED = 3;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
