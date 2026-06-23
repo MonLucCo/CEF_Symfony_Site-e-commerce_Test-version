@@ -5,22 +5,32 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ 'order.success.title'|trans }}</h1>
-	<h2>{{ 'order.success.subtitle'|trans }}</h2>
 
-	<p>{{ 'order.success.message'|trans }}</p>
+	<section class="order-container">
 
-	<p>
-		<a href="{{ path('app_order_send_confirmation') }}" class="btn btn-primary">
-			{{ 'order.success.send_email'|trans }}
-		</a>
-	</p>
+		<h1>{{ 'order.success.title'|trans }}</h1>
+		<h2>{{ 'order.success.subtitle'|trans }}</h2>
 
-	<p>
-		<a href="{{ path('app_products') }}">{{ 'order.success.back_shop'|trans }}</a>
-	</p>
+		<p>{{ 'order.success.message'|trans }}</p>
 
-	<p>
-		<a href="{{ path('app_home') }}">{{ 'order.success.back_home'|trans }}</a>
-	</p>
-{% endblock %}
+		<div class="order-actions">
+			<div class="order-action-left">
+				<p>
+					<a href="{{ path('app_products') }}" class="btn-secondary">{{ 'order.success.back_shop'|trans }}</a>
+				</p>
+
+				<p>
+					<a href="{{ path('app_home') }}" class="btn-secondary">{{ 'order.success.back_home'|trans }}</a>
+				</p>
+			</div>
+
+			<div class="order-actions-rigth">
+				<p>
+					<a href="{{ path('app_order_send_confirmation') }}" class="btn-primary">
+						{{ 'order.success.send_email'|trans }}
+					</a>
+				</p>
+			</div>
+		</section>
+
+	{% endblock %}

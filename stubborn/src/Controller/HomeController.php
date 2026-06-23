@@ -13,13 +13,10 @@ final class HomeController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         // Récupération des produits mis en avant
-        $featured = $productRepository->findBy(
-            ['isFeatured' => true],
-            ['price' => 'ASC'],
-            3
-        );
+        $featured = $productRepository->findFeatured();
 
         return $this->render('home/index.html.twig', [
             'featured' => $featured,
         ]);
-    }}
+    }
+}

@@ -1,0 +1,117 @@
+{% trans_default_domain 'admin' %}
+
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}
+	{{ 'admin.edit_title'|trans }}
+{% endblock %}
+
+{% block body %}
+	<section class="admin-container">
+		<h1>{{ 'admin.edit_title'|trans }}</h1>
+
+		{{ form_start(form) }}
+
+		<div class=" admin-layout">
+			<div class="admin-left">
+
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'product.form.required.legend'|trans({}, 'forms') }}</legend>
+					{{ form_row(form.name) }}
+					{{ form_row(form.price) }}
+				</fieldset>
+
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'product.form.stock.legend'|trans({}, 'forms') }}</legend>
+
+					<p>{{ 'product.form.stock.help'|trans({}, 'forms') }}</p>
+
+					{{ form_row(form.stockXS) }}
+					{{ form_row(form.stockS) }}
+					{{ form_row(form.stockM) }}
+					{{ form_row(form.stockL) }}
+					{{ form_row(form.stockXL) }}
+				</fieldset>
+			</div>
+
+			<div class="admin-right">
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'admin.current_image.legend'|trans }}</legend>
+
+					{% if product.image %}
+						<img src="{{ asset('uploads/products/' ~ product.image) }}" alt="{{ product.name }}" class="admin-image">
+					{% else %}
+						<p class="text-muted">{{ 'admin.current_image.none'|trans }}</p>
+					{% endif %}
+				</fieldset>
+
+				<fieldset class="admin-fieldset">
+					<legend>{{ 'admin.new_image.legend'|trans }}</legend>
+
+					{{ form_row(form.imageFile) }}
+
+					<button type="button" id="clear-file" class="btn-secondary">
+						{{ 'admin.new_image.clear'|trans }}
+					</button>
+
+					<div id="preview" style="display:none;">
+						<p class="form-label">{{ 'admin.new_image.preview'|trans }}</p>
+						<img id="preview-img" class="admin-image">
+					</div>
+				</fieldset>
+
+			</div>
+		</div>
+
+		<section class="admin-actions">
+
+			<a href="{{ path('app_admin') }}" class="btn-secondary">
+				{{ 'admin.actions.back'|trans }}
+			</a>
+
+			<button class="btn-primary">{{ 'admin.actions.save'|trans }}</button>
+		</section>
+
+		{{ form_end(form) }}
+	</section>
+
+{% endblock %}
+
+{% block javascripts_body %}
+	<script>
+		document.addEventListener('turbo:load', () => {
+const input = document.querySelector('input[type="file"]');
+const preview = document.getElementById('preview');
+const previewImg = document.getElementById('preview-img');
+const clearBtn = document.getElementById('clear-file');
+
+if (! input) 
+return;
+
+
+
+// Masquer le bouton au chargement
+clearBtn.style.display = 'none';
+
+input.addEventListener('change', e => {
+const file = e.target.files[0];
+
+if (! file) {
+preview.style.display = 'none';
+clearBtn.style.display = 'none';
+return;
+}
+
+previewImg.src = URL.createObjectURL(file);
+preview.style.display = 'block';
+clearBtn.style.display = 'inline-block';
+});
+
+clearBtn.addEventListener('click', () => {
+input.value = "";
+preview.style.display = 'none';
+clearBtn.style.display = 'none';
+});
+});
+	</script>
+{% endblock %}

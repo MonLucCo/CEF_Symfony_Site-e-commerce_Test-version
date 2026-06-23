@@ -24,3 +24,6 @@ services:
     App\Service\OrderService:
         arguments:
             $defaultLocale: "%kernel.default_locale%"
+    App\Service\ProductService:
+        arguments:
+            $projectDir: "%kernel.project_dir%"
