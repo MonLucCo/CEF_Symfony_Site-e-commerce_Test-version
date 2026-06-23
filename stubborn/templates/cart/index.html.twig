@@ -23,63 +23,65 @@
 		{% if items is empty %}
 			<p class="cart-empty">{{ 'cart.empty'|trans }}</p>
 		{% else %}
-			<table class="table">
-				<thead>
-					<tr>
-						<th>{{ 'cart.product.name'|trans }}</th>
-						<th>{{ 'cart.product.size'|trans }}</th>
-						<th>{{ 'cart.product.price'|trans }}</th>
-						<th>{{ 'cart.product.quantity'|trans }}</th>
-						<th>{{ 'cart.product.total'|trans }}</th>
-						<th>{{ 'cart.actions.name'|trans }}</th>
-						<th>{{ 'cart.product.stock'|trans }}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for item in items %}
+			<div class="cart-table-wrapper">
+				<table class="table">
+					<thead>
 						<tr>
-							<td>{{ item.product.name }}</td>
-							<td>{{ item.size }}</td>
-							<td>{{ item.price|number_format(2, ',', ' ') }}
-								€</td>
-							<td>
-								<div class="cart-qty">
-									<form action="{{ path('app_cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
-										<input type="hidden" name="_token" value="{{ csrf_token('app_cart_decrease') }}">
-										<button class="btn-secondary">−</button>
-									</form>
-
-									<span class="mx-2">{{ item.quantity }}</span>
-
-									<form action="{{ path('app_cart_add', {id: item.product.id, size: item.size}) }}" method="post">
-										<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
-										<button class="btn-secondary">+</button>
-									</form>
-								</div>
-							</td>
-							<td>{{ item.total|number_format(2, ',', ' ') }}
-								€</td>
-							<td>
-								<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
-									<input type="hidden" name="_token" value="{{ csrf_token('app_cart_remove') }}">
-									<button class="btn-secondary">
-										{{ 'cart.actions.remove'|trans }}
-									</button>
-								</form>
-							</td>
-							<td>
-								{% set stock = item.product.getStockForSize(item.size) %}
-								{% if stock > 0 %}
-									{{ stock }}
-									{{ 'cart.status.in_stock'|trans }}
-								{% else %}
-									<span class="text-danger">{{ 'cart.status.out_of_stock'|trans }}</span>
-								{% endif %}
-							</td>
+							<th>{{ 'cart.product.name'|trans }}</th>
+							<th>{{ 'cart.product.size'|trans }}</th>
+							<th>{{ 'cart.product.price'|trans }}</th>
+							<th>{{ 'cart.product.quantity'|trans }}</th>
+							<th>{{ 'cart.product.total'|trans }}</th>
+							<th>{{ 'cart.actions.name'|trans }}</th>
+							<th>{{ 'cart.product.stock'|trans }}</th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{% for item in items %}
+							<tr>
+								<td>{{ item.product.name }}</td>
+								<td>{{ item.size }}</td>
+								<td>{{ item.price|number_format(2, ',', ' ') }}
+									€</td>
+								<td>
+									<div class="cart-qty">
+										<form action="{{ path('app_cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
+											<input type="hidden" name="_token" value="{{ csrf_token('app_cart_decrease') }}">
+											<button class="btn-secondary">−</button>
+										</form>
+
+										<span class="mx-2">{{ item.quantity }}</span>
+
+										<form action="{{ path('app_cart_add', {id: item.product.id, size: item.size}) }}" method="post">
+											<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
+											<button class="btn-secondary">+</button>
+										</form>
+									</div>
+								</td>
+								<td>{{ item.total|number_format(2, ',', ' ') }}
+									€</td>
+								<td>
+									<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
+										<input type="hidden" name="_token" value="{{ csrf_token('app_cart_remove') }}">
+										<button class="btn-secondary">
+											{{ 'cart.actions.remove'|trans }}
+										</button>
+									</form>
+								</td>
+								<td>
+									{% set stock = item.product.getStockForSize(item.size) %}
+									{% if stock > 0 %}
+										{{ stock }}
+										{{ 'cart.status.in_stock'|trans }}
+									{% else %}
+										<span class="text-danger">{{ 'cart.status.out_of_stock'|trans }}</span>
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 
 			<p class="cart-total">
 				<strong>{{ 'cart.total'|trans }}
