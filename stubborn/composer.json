@@ -88,6 +88,46 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "test:init": [
+            "rm -f var/tests/data_test.db",
+            "mkdir -p var/tests",
+            "php bin/console doctrine:schema:create --env=test"
+        ],
+        "test:run": [
+            "@test:init",
+            "php bin/phpunit"
+        ],
+        "test:run-verbose": [
+            "@test:init",
+            "php bin/phpunit --testdox"
+        ],
+        "services:stop": [
+            "symfony server:stop || true",
+            "sudo service mysql stop || true",
+            "php bin/console messenger:stop-workers || true",
+            "pkill mailpit >/dev/null 2>&1 || true"
+        ],
+        "services:start": [
+            "sudo service mysql start",
+            "./mailpit-linux-amd64 --smtp 1025 --ui 8025 &",
+            "php bin/console messenger:consume async -vv &",
+            "symfony serve -d",
+            "symfony server:status"
+        ],
+        "services:restart": [
+            "@services:stop",
+            "php bin/console cache:clear",
+            "composer dump-autoload",
+            "@services:start"
+        ],
+        "start:test": [
+            "@services:restart",
+            "@test:run"
+        ],
+        "start:test-verbose": [
+            "@services:restart",
+            "@test:run-verbose"
         ]
     },
     "conflict": {
