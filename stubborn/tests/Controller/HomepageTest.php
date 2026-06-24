@@ -2,16 +2,17 @@
 
 namespace App\Tests\Controller;
 
+use App\Repository\ProductRepository;
 use App\Tests\Functional\WebTestCaseBase;
 
 class HomepageTest extends WebTestCaseBase
 {
-    public function test_homepage_is_accessible()
+    public function test_HOM_01_homepage_is_accessible()
     {
         $this->visit('/');
     }
 
-    public function test_homepage_menu_for_visitor_uses_correct_translations()
+    public function test_HOM_02_homepage_menu_for_visitor_uses_correct_translations()
     {
         $this->visit('/');
 
@@ -20,7 +21,7 @@ class HomepageTest extends WebTestCaseBase
         $this->assertSelectorTextContains('nav', $this->t('menu.register'));
     }
 
-    public function test_homepage_menu_for_visitor_contains_correct_routes()
+    public function test_HOM_03_homepage_menu_for_visitor_contains_correct_routes()
     {
         $this->visit('/');
 
@@ -34,16 +35,29 @@ class HomepageTest extends WebTestCaseBase
         $this->assertLinkNotExists('/logout');
     }
 
-    public function test_homepage_structure_is_correct()
+    public function test_HOM_04_homepage_structure_is_correct()
     {
         $this->visit('/');
 
         $this->assertSelectorExists('.home-hero');
         $this->assertSelectorExists('.home-about');
-        $this->assertSelectorNotExists('.home-featured');
+
+        $repo = static::getContainer()->get(ProductRepository::class);
+        $featured = $repo->findBy(['isFeatured' => true]);
+
+        if ($featured) {
+            $this->markMessageTestId(id: "HOM-04-01", message: "Featured expected: " . count($featured));
+
+            $this->assertSelectorCount(count($featured), '.home-featured .card');
+            $this->assertSelectorExists('.home-featured');
+        } else {
+            $this->markMessageTestId(id: "HOM-04-01", message: "No featured expected");
+
+            $this->assertSelectorNotExists('.home-featured');
+        }
     }
 
-    public function test_homepage_content_translations_are_displayed()
+    public function test_HOM_05_homepage_content_translations_are_displayed()
     {
         $this->visit('/');
 

@@ -89,17 +89,25 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "test:init": [
+        "app:fixtures": [
+            "php bin/console doctrine:fixtures:load --env=dev --group=dev  --no-interaction"
+        ],
+        "test:init-db": [
             "rm -f var/tests/data_test.db",
             "mkdir -p var/tests",
             "php bin/console doctrine:schema:create --env=test"
         ],
+        "test:fixtures": [
+            "php bin/console doctrine:fixtures:load --env=test --group=test --no-interaction"
+        ],
         "test:run": [
-            "@test:init",
+            "@test:init-db",
+            "@test:fixtures",
             "php bin/phpunit"
         ],
         "test:run-verbose": [
-            "@test:init",
+            "@test:init-db",
+            "@test:fixtures",
             "php bin/phpunit --testdox"
         ],
         "services:stop": [

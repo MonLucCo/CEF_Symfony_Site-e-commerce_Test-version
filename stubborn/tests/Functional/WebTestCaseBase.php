@@ -71,4 +71,12 @@ abstract class WebTestCaseBase extends WebTestCase
     {
         return $this->container->get($id);
     }
+
+    /**
+     * Affiche un message formaté dans le terminal
+     */
+    protected function markMessageTestId(string $id, string $message): void
+    {
+        fwrite(STDOUT, "[$id] >> " . $message . "\n");
+    }
 }
