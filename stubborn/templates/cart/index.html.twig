@@ -45,14 +45,18 @@
 									€</td>
 								<td>
 									<div class="cart-qty">
-										<form action="{{ path('app_cart_decrease', {id: item.product.id, size: item.size}) }}" method="post">
+										<form action="{{ path('app_cart_decrease') }}" method="post">
+										    <input type="hidden" name="id" value="{{ item.product.id }}">
+    										<input type="hidden" name="size" value="{{ item.size }}">
 											<input type="hidden" name="_token" value="{{ csrf_token('app_cart_decrease') }}">
 											<button class="btn-secondary">−</button>
 										</form>
 
 										<span class="mx-2">{{ item.quantity }}</span>
 
-										<form action="{{ path('app_cart_add', {id: item.product.id, size: item.size}) }}" method="post">
+										<form action="{{ path('app_cart_add') }}" method="post">
+										    <input type="hidden" name="id" value="{{ item.product.id }}">
+    										<input type="hidden" name="size" value="{{ item.size }}">
 											<input type="hidden" name="_token" value="{{ csrf_token('app_cart_add') }}">
 											<button class="btn-secondary">+</button>
 										</form>
@@ -61,7 +65,9 @@
 								<td>{{ item.total|number_format(2, ',', ' ') }}
 									€</td>
 								<td>
-									<form action="{{ path('app_cart_remove', {id: item.product.id, size: item.size}) }}" method="post" style="display:inline;">
+									<form action="{{ path('app_cart_remove') }}" method="post">
+										<input type="hidden" name="id" value="{{ item.product.id }}">
+    									<input type="hidden" name="size" value="{{ item.size }}">
 										<input type="hidden" name="_token" value="{{ csrf_token('app_cart_remove') }}">
 										<button class="btn-secondary">
 											{{ 'cart.actions.remove'|trans }}

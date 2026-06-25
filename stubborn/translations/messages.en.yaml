@@ -113,8 +113,18 @@ cart:
   total: "Total cart"
   flash:
     added: "Product added to cart."
+    not_added: "Unable to add this product to cart."
+    stock_limit: "Maximum reached for this product in your cart."
     removed: "Product removed from cart."
+    removed_named: "%product% (size %size%) has been removed from your cart."
     cleared: "Cart cleared."
+    quantity_zero: "The quantity is already zero."
+    product_not_found: "This product could not be found."
+    product_not_in_cart: "This product is not in your cart."
+    size_not_in_cart: "This size is not present in your cart."
+    size_not_available: "This size is not available for this product."
+    decreased: "Quantity decreased. %quantity% item(s) remain in your cart."
+    internal_error: "An internal error occurred. Please try again later."
   actions:
     name: "Actions"
     remove: "Remove"

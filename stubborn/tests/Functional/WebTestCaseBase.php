@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+
 abstract class WebTestCaseBase extends WebTestCase
 {
     protected $client;
@@ -75,8 +76,33 @@ abstract class WebTestCaseBase extends WebTestCase
     /**
      * Affiche un message formaté dans le terminal
      */
-    protected function markMessageTestId(string $id, string $message): void
+    protected function markMessageTestId(string $id, string $message, bool $newline = false): void
     {
-        fwrite(STDOUT, "[$id] >> " . $message . "\n");
+        $prefix = $newline ? "\n" : '';
+        fwrite(STDOUT, $prefix . "[$id] >> " . $message . "\n");
+    }
+
+    /**
+     * Connecte un utilisateur (cf. tests/Fixtures/AppTestFixtures.php)
+     */
+    protected function loginAsUser(
+        string $email = 'client@test.com',
+        string $password = 'password'
+    ): \Symfony\Component\DomCrawler\Crawler {
+        // 1) Aller sur /login
+        $crawler = $this->client->request('GET', '/login');
+
+        // 2) Soumettre le formulaire
+        $form = $crawler->filter('form')->form([
+            '_username' => $email,
+            '_password' => $password
+        ]);
+        $this->client->submit($form);
+
+        // 3) Vérifier redirection après login
+        $this->assertResponseRedirects('/');
+
+        // 4) Suivre la redirection et retourner le crawler
+        return $this->client->followRedirect();
     }
 }
