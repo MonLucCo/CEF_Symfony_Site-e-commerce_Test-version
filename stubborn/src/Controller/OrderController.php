@@ -17,8 +17,8 @@ class OrderController extends AbstractController
         // Contrôle des accès direct
         // Empêcher les admins de passer commande
         if ($this->isGranted('ROLE_ADMIN')) {
-            $this->addFlash('error', 'order.flash.admin_forbidden');
-            return $this->redirectToRoute('app_home');
+            $this->addFlash('error', 'admin.flash.order_forbidden');
+            return $this->redirectToRoute('app_admin');
         }
         // Vérifier que l'utilisateur est connecté et vérifié
         if (!$this->getUser()) {
@@ -81,7 +81,7 @@ class OrderController extends AbstractController
         return $this->render('order/cancel.html.twig');
     }
 
-    #[Route('/order/send-confirmation', name: 'app_order_send_confirmation')]
+    #[Route('/order/send-confirmation', name: 'app_order_send_confirmation', methods: ['POST'])]
     public function sendConfirmation(
         OrderService $orderService
     ): Response {

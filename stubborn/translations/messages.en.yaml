@@ -203,7 +203,6 @@ order:
     back_home: "← Back to home"
   flash:
     empty_quantities: "The item quantity is insufficient, no order created."
-    admin_forbidden: "Administrators cannot place orders."
     login_required: "You must be logged in to place an order."
     user_not_verified: "Your email address is not verified. Please verify your email address to place an order."
     success_order: "Your order has been confirmed. A confirmation email has been sent to you."

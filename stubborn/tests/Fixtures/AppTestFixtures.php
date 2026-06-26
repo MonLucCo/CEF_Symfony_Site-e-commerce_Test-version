@@ -52,7 +52,16 @@ class AppTestFixtures extends Fixture implements FixtureGroupInterface
     {
         $this->clearTargetDirectory();
 
-        // Utilisateur client
+        // Utilisateur admin
+        $admin = new User();
+        $admin->setName('Admin');
+        $admin->setEmail('admin@test.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->passwordHasher->hashPassword($admin, 'password'));
+        $admin->setDeliveryAddress('Adresse Admin');
+        $manager->persist($admin);
+
+        // Utilisateur client (vérifié)
         $user = new User();
         $user->setName('Client');
         $user->setEmail('client@test.com');
@@ -62,14 +71,15 @@ class AppTestFixtures extends Fixture implements FixtureGroupInterface
         $user->setIsVerified(true);
         $manager->persist($user);
 
-        // Utilisateur admin
-        $admin = new User();
-        $admin->setName('Admin');
-        $admin->setEmail('admin@test.com');
-        $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword($this->passwordHasher->hashPassword($admin, 'password'));
-        $admin->setDeliveryAddress('Adresse Admin');
-        $manager->persist($admin);
+        // Utilisateur client (non-vérifié)
+        $user = new User();
+        $user->setName('Client nouveau');
+        $user->setEmail('nouveau@test.com');
+        $user->setRoles(['ROLE_USER']);
+        $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
+        $user->setDeliveryAddress('Adresse du client');
+        $user->setIsVerified(false);
+        $manager->persist($user);
 
         // Produits
         $numberTestProduct = 5; // Adaptation selon besoin de produits

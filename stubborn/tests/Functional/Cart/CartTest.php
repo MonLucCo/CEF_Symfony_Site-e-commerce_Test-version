@@ -6,95 +6,6 @@ use App\Tests\Functional\WebTestCaseBase;
 
 class CartTest extends WebTestCaseBase
 {
-    private function addProduct(int $id, string $size): void
-    {
-        // 1) Page produit
-        $crawler = $this->client->request('GET', "/product/$id");
-
-        // 2) Récupérer le formulaire
-        $form = $crawler->selectButton($this->t('product.add_to_cart'))->form();
-
-        // 3) Modifier uniquement la taille
-        $form['size'] = $size;
-
-        // 4) Soumettre
-        $this->client->submit($form);
-
-        // 5) Suivre la redirection
-        $this->client->followRedirect();
-    }
-
-    private function decreaseProduct(int $id, string $size): void
-    {
-        $crawler = $this->client->request('GET', '/cart/');
-
-        // cibler le bon formulaire
-        $form = $crawler->filter("form[action='/cart/decrease']")
-            ->reduce(function ($node) use ($id, $size) {
-                return $node->filter("input[name='id'][value='$id']")->count() &&
-                    $node->filter("input[name='size'][value='$size']")->count();
-            })
-            ->form();
-
-        $this->client->submit($form);
-        $this->client->followRedirect();
-    }
-
-    private function removeProduct(int $id, string $size): void
-    {
-        $crawler = $this->client->request('GET', '/cart/');
-
-        $form = $crawler->filter("form[action='/cart/remove']")
-            ->reduce(function ($node) use ($id, $size) {
-                return $node->filter("input[name='id'][value='$id']")->count() &&
-                    $node->filter("input[name='size'][value='$size']")->count();
-            })
-            ->form();
-
-        $this->client->submit($form);
-        $this->client->followRedirect();
-    }
-
-    private function clearCart(): void
-    {
-        $crawler = $this->client->request('GET', '/cart/');
-
-        $form = $crawler->filter("form[action='/cart/clear']")->form();
-
-        $this->client->submit($form);
-        $this->client->followRedirect();
-    }
-
-    private function readCartTable(): array
-    {
-        $crawler = $this->client->getCrawler();
-
-        $rows = $crawler->filter('table.table tbody tr');
-
-        $data = [];
-
-        foreach ($rows as $i => $row) {
-            $rowCrawler = $rows->eq($i);
-
-            $unit = $rowCrawler->filter('td:nth-child(3)')->text();   // prix unitaire
-            $qty  = $rowCrawler->filter('.cart-qty span')->text();    // quantité
-            $line = $rowCrawler->filter('td:nth-child(5)')->text();   // total ligne
-
-            $data[] = [
-                'unit' => floatval(str_replace(',', '.', preg_replace('/[^0-9,]/', '', $unit))),
-                'qty'  => intval($qty),
-                'line' => floatval(str_replace(',', '.', preg_replace('/[^0-9,]/', '', $line))),
-            ];
-        }
-
-        return $data;
-    }
-
-    private function readCartTotal(): float
-    {
-        $text = $this->client->getCrawler()->filter('.cart-total strong')->text();
-        return floatval(str_replace(',', '.', preg_replace('/[^0-9,]/', '', $text)));
-    }
 
     /** CRT-01 : accès au panier → redirection → login → accès autorisé */
     public function test_CRT_01_cart_is_accessible()
@@ -283,7 +194,7 @@ class CartTest extends WebTestCaseBase
         $this->addProduct(2, 'L'); // quantité = 1
 
         // Aller au panier
-        $this->visit('/cart/');
+        $this->visit('/cart' . '/');
 
         // Lire les lignes
         $rows = $this->readCartTable();
@@ -326,7 +237,7 @@ class CartTest extends WebTestCaseBase
         $this->addProduct(3, 'S');
 
         // Vérification
-        $this->visit('/cart/');
+        $this->visit('/cart' . '/');
         $rows = $this->readCartTable();
 
         $expected = array_sum(array_column($rows, 'line'));

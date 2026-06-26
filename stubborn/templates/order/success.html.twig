@@ -16,20 +16,22 @@
 		<div class="order-actions">
 			<div class="order-action-left">
 				<p>
-					<a href="{{ path('app_products') }}" class="btn-secondary">{{ 'order.success.back_shop'|trans }}</a>
+					<a href="{{ path('app_products') }}" class="btn-secondary" data-test="order-btn-shop">{{ 'order.success.back_shop'|trans }}</a>
 				</p>
 
 				<p>
-					<a href="{{ path('app_home') }}" class="btn-secondary">{{ 'order.success.back_home'|trans }}</a>
+					<a href="{{ path('app_home') }}" class="btn-secondary" data-test="order-btn-home">{{ 'order.success.back_home'|trans }}</a>
 				</p>
 			</div>
 
 			<div class="order-actions-rigth">
 				<p>
-					<a href="{{ path('app_order_send_confirmation') }}" class="btn-primary">
-						{{ 'order.success.send_email'|trans }}
-					</a>
-				</p>
+			<form action="{{ path('app_order_send_confirmation') }}" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token('order_send_confirmation') }}">
+				<button class="btn-primary" data-test="order-btn-email">
+					{{ 'order.success.send_email'|trans }}
+				</button>
+			</form>
 			</div>
 		</section>
 

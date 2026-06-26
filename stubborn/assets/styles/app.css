@@ -356,6 +356,11 @@ select:focus {
     align-items: center;
 }
 
+.cart-info {
+    text-align: center;
+    max-width: 260px;
+}
+
 .cart-clear {
     margin: 1.5rem;
 }

@@ -116,14 +116,14 @@
 
 			{# --- CAS 1 : ADMIN --- #}
 			{% if items is not empty and is_granted('ROLE_ADMIN') %}
-				<p class="cart-info text-danger" style="text-align:center; max-width:260px;">
+				<p class="cart-info text-danger" data-test="cart-info-admin">
 					{{ 'cart.info.no_order_admin'|trans }}
 				</p>
 			{% endif %}
 
 			{# --- CAS 2 : USER NON VERIFIE --- #}
 			{% if items is not empty and is_granted('ROLE_USER') and not is_granted('IS_VERIFIED') %}
-				<div class="cart-info" style="text-align:center; max-width:260px;">
+				<div class="cart-info" data-test="cart-info-user">
 					<p class="text-danger">
 						{{ 'cart.info.verify_before_order'|trans }}
 					</p>
@@ -139,7 +139,7 @@
 
 			{# --- CAS 3 : USER VERIFIE (déjà existant) --- #}
 			{% if items is not empty and is_granted('ROLE_USER') and is_granted('IS_VERIFIED') and not is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('app_order_checkout') }}" class="btn-primary">
+				<a href="{{ path('app_order_checkout') }}" class="btn-primary" data-test="cart-btn-checkout">
 					{{ 'cart.actions.checkout'|trans }}
 				</a>
 			{% endif %}
