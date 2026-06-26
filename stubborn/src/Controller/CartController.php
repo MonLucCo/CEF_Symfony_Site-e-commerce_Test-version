@@ -21,7 +21,7 @@ class CartController extends AbstractController
             throw $this->createAccessDeniedException('cart.csrf.invalid');
         }
 
-        return null; // ✔ Token valide → on laisse l’action continuer
+        return null; // Token valide → on laisse l’action continuer
     }
 
     private function redirectAfterAction(Request $request): Response
@@ -52,42 +52,130 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/add/{id}/{size}', name: 'add', methods: ['POST'])]
-    public function add(int $id, string $size, CartService $cartService, Request $request, TranslatorInterface $translator): Response
+    #[Route('/add', name: 'add', methods: ['POST'])]
+    public function add(CartService $cartService, Request $request, TranslatorInterface $translator): Response
     {
         if ($response = $this->verifyCsrfToken($request, 'app_cart_add')) {
-            return $response; // ✔ renvoie la page 403 si token CSRF invalide
+            return $response; // renvoie la page 403 si token CSRF invalide
         }
 
-        $cartService->add($id, $size);
+        $id = $request->request->get('id');
+        $size = $request->request->get('size');
 
-        $this->addFlash('success', 'cart.flash.added');
+        try {
+            $cartStatus = $cartService->add($id, $size);
+        } catch (\Throwable $e) {
+            $this->addFlash('error', 'cart.flash.internal_error');
+            return $this->redirectAfterAction($request);
+        }
+
+        switch ($cartStatus) {
+            case 'added':
+                $this->addFlash('success', 'cart.flash.added');
+                break;
+
+            case 'stock_limit_reached':
+                $this->addFlash('warning', 'cart.flash.stock_limit');
+                break;
+
+            case 'invalid_size':
+            case 'product_not_found':
+            case 'size_not_available':
+                $this->addFlash('error', 'cart.flash.not_added');
+                break;
+
+            default:
+                $this->addFlash('error', 'cart.flash.internal_error');
+                break;
+        }
 
         return $this->redirectAfterAction($request);
     }
 
-    #[Route('/decrease/{id}/{size}', name: 'decrease', methods: ['POST'])]
-    public function decrease(int $id, string $size, CartService $cartService, Request $request, TranslatorInterface $translator): Response
+    #[Route('/decrease', name: 'decrease', methods: ['POST'])]
+    public function decrease(CartService $cartService, Request $request, TranslatorInterface $translator): Response
     {
         if ($response = $this->verifyCsrfToken($request, 'app_cart_decrease')) {
-            return $response; // ✔ renvoie la page 403 si token CSRF invalide
+            return $response; // renvoie la page 403 si token CSRF invalide
         }
 
-        $cartService->decrease($id, $size);
+        $id = $request->request->get('id');
+        $size = $request->request->get('size');
+
+        try {
+            $result = $cartService->decrease($id, $size);
+        } catch (\Throwable $e) {
+            $this->addFlash('error', 'cart.flash.internal_error');
+            return $this->redirectAfterAction($request);
+        }
+
+        switch ($result['status']) {
+
+            case 'decreased':
+                $this->addFlash(
+                    'info',
+                    $translator->trans('cart.flash.decreased', [
+                        '%quantity%' => $result['quantity']
+                    ])
+                );
+                break;
+
+            case 'quantity_already_zero':
+                $this->addFlash('warning', 'cart.flash.quantity_zero');
+                break;
+
+            case 'product_not_in_cart':
+            case 'size_not_in_cart':
+                $this->addFlash('error', 'cart.flash.not_added');
+                break;
+
+            default:
+                $this->addFlash('error', 'cart.flash.internal_error');
+                break;
+        }
 
         return $this->redirectAfterAction($request);
     }
 
-    #[Route('/remove/{id}/{size}', name: 'remove', methods: ['POST'])]
-    public function remove(int $id, string $size, CartService $cartService, Request $request, TranslatorInterface $translator): Response
+    #[Route('/remove', name: 'remove', methods: ['POST'])]
+    public function remove(CartService $cartService, Request $request, TranslatorInterface $translator): Response
     {
         if ($response = $this->verifyCsrfToken($request, 'app_cart_remove')) {
-            return $response; // ✔ renvoie la page 403 si token CSRF invalide
+            return $response; // renvoie la page 403 si token CSRF invalide
         }
 
-        $cartService->remove($id, $size);
+        $id = $request->request->get('id');
+        $size = $request->request->get('size');
 
-        $this->addFlash('info', 'cart.flash.removed');
+        try {
+            $status = $cartService->remove($id, $size);
+        } catch (\Throwable $e) {
+            $this->addFlash('error', 'cart.flash.internal_error');
+            return $this->redirectAfterAction($request);
+        }
+
+        switch ($status) {
+            case 'removed':
+                // Récupération du nom du produit pour l’UX
+                $product = $cartService->getProduct($id);
+                $this->addFlash(
+                    'warning',
+                    $translator->trans('cart.flash.removed_named', [
+                        '%product%' => $product->getName(),
+                        '%size%' => $size
+                    ])
+                );
+                break;
+
+            case 'product_not_in_cart':
+            case 'size_not_in_cart':
+                $this->addFlash('error', 'cart.flash.not_added');
+                break;
+
+            default:
+                $this->addFlash('error', 'cart.flash.internal_error');
+                break;
+        }
 
         return $this->redirectAfterAction($request);
     }
@@ -97,12 +185,21 @@ class CartController extends AbstractController
     {
 
         if ($response = $this->verifyCsrfToken($request, 'app_cart_clear')) {
-            return $response; // ✔ renvoie la page 403 si token CSRF invalide
+            return $response; // renvoie la page 403 si token CSRF invalide
         }
 
-        $cartService->clear();
+        try {
+            $status = $cartService->clear();
+        } catch (\Throwable $e) {
+            $this->addFlash('error', 'cart.flash.internal_error');
+            return $this->redirectAfterAction($request);
+        }
 
-        $this->addFlash('warning', 'cart.flash.cleared');
+        if ($status === 'cleared') {
+            $this->addFlash('warning', 'cart.flash.cleared');
+        } else {
+            $this->addFlash('error', 'cart.flash.internal_error');
+        }
 
         return $this->redirectAfterAction($request);
     }

@@ -6,9 +6,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Product;
 use App\Entity\User;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements FixtureGroupInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -75,6 +76,11 @@ class AppFixtures extends Fixture
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
+    }
+
+    public static function getGroups(): array
+    {
+        return ['dev'];
     }
 
     public function load(ObjectManager $manager): void

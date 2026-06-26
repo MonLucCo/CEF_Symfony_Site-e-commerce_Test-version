@@ -16,16 +16,16 @@
 		<div class="order-actions">
 			<div class="order-action-left">
 				<p>
-					<a href="{{ path('app_cart_index') }}" class="btn-secondary">{{ 'order.cancel.back_cart'|trans }}</a>
+					<a href="{{ path('app_cart_index') }}" class="btn-secondary" data-test="order-btn-cart">{{ 'order.cancel.back_cart'|trans }}</a>
 				</p>
 				<p>
-					<a href="{{ path('app_home') }}" class="btn-secondary">{{ 'order.cancel.back_home'|trans }}</a>
+					<a href="{{ path('app_home') }}" class="btn-secondary" datat-test="order-btn-home">{{ 'order.cancel.back_home'|trans }}</a>
 				</p>
 			</div>
 
 			<div class="order-actions-rigth">
 				<p>
-					<a href="{{ path('app_order_checkout') }}" class="btn-primary">{{ 'order.cancel.retry'|trans }}</a>
+					<a href="{{ path('app_order_checkout') }}" class="btn-primary" data-test="order-btn-checkout">{{ 'order.cancel.retry'|trans }}</a>
 				</p>
 			</div>
 		</div>

@@ -13,7 +13,9 @@
 		</div>
 
 		{# Formulaire permettant de sélectionner la taille du sweat-shirt, et de l'ajouter au panier #}
-		<form action="{{ path('app_cart_add', { id: product.id, size: 'SIZE_PLACEHOLDER' }) }}" method="post" onsubmit="this.action = this.action.replace('SIZE_PLACEHOLDER', document.getElementById('size').value)">
+		<form action="{{ path('app_cart_add') }}" method="post">
+    		<input type="hidden" name="id" value="{{ product.id }}">
+			
 			<div class="form-group">
 				<label for="size">{{ 'product.size'|trans }}</label>
 				<select name="size" id="size" required>

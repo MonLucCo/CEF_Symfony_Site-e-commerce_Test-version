@@ -45,3 +45,4 @@ admin:
     featured_removed: "Product removed from featured."
     featured_limit: "You cannot feature more than 3 products."
     upload_error: "Error occurred while uploading the image."
+    order_forbidden: "Administrators cannot place orders."

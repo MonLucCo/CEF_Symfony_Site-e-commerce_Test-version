@@ -194,4 +194,15 @@ class Product
             default => null,
         };
     }
+
+    public function setStockIdemForSize(int $value): self
+    {
+        $this->stockXS = $value;
+        $this->stockS  = $value;
+        $this->stockM  = $value;
+        $this->stockL  = $value;
+        $this->stockXL = $value;
+
+        return $this;
+    }
 }
