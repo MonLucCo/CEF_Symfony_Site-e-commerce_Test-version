@@ -28,24 +28,24 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
-    public function add(int $productId, string $size): void
+    public function add(int $productId, string $size): string
     {
         // Validation de la taille
         if (!in_array($size, Product::SIZES, true)) {
-            return; // ou throw une exception si tu veux être strict
+            return 'invalid_size';
         }
 
         $cart = $this->getCart();
         $product = $this->productRepository->find($productId);
 
         if (!$product) {
-            return;
+            return 'product_not_found';
         }
 
         // Vérification du stock pour cette taille
         $maxStock = $product->getStockForSize($size);
         if ($maxStock === null) {
-            return;
+            return 'size_not_available';
         }
 
         // Si le produit n'existe pas encore dans le panier
@@ -64,37 +64,56 @@ class CartService
         // Vérification du stock
         if ($currentQty < $maxStock) {
             $cart[$productId][$size]['quantity']++;
-        }
+        } else return 'stock_limit_reached';
 
         $this->saveCart($cart);
+
+        return 'added';
     }
 
-    public function decrease(int $id, string $size): void
+    public function decrease(int $id, string $size): array
     {
         $cart =  $this->getCart();
 
+        if (!isset($cart[$id])) {
+            return ['status' => 'product_not_in_cart'];
+        }
+
         if (!isset($cart[$id][$size])) {
-            return;
+            return ['status' => 'size_not_in_cart'];
+        }
+
+        $currentQty = $cart[$id][$size]['quantity'];
+
+        if ($currentQty === 0) {
+            return [
+                'status' => 'quantity_already_zero',
+                'quantity' => 0
+            ];
         }
 
         // Diminuer la quantité
-        if ($cart[$id][$size]['quantity'] > 0) {
-            $cart[$id][$size]['quantity']--;
-        }
-
-        // On NE supprime PAS la ligne ici
-        // min = 0, c’est tout
+        $cart[$id][$size]['quantity']--;
 
         $this->saveCart($cart);
+
+        return [
+            'status' => 'decreased',
+            'quantity' => $cart[$id][$size]['quantity']
+        ];
     }
 
-    public function remove(int $productId, string $size): void
+    public function remove(int $productId, string $size): string
     {
         $cart = $this->getCart();
 
         // Si l'entrée n'existe pas, on ne touche à rien
+        if (!isset($cart[$productId])) {
+            return 'product_not_in_cart';
+        }
+
         if (!isset($cart[$productId][$size])) {
-            return;
+            return 'size_not_in_cart';
         }
 
         unset($cart[$productId][$size]);
@@ -105,11 +124,15 @@ class CartService
         }
 
         $this->saveCart($cart);
+
+        return 'removed';
     }
 
-    public function clear(): void
+    public function clear(): string
     {
         $this->session->remove('cart');
+
+        return 'cleared';
     }
 
     public function getDetailedCart(): array
@@ -171,5 +194,10 @@ class CartService
     {
         $this->session->remove('last_order_items');
         $this->session->remove('last_order_total');
+    }
+
+    public function getProduct(int $id): ?Product
+    {
+        return $this->productRepository->find($id);
     }
 }

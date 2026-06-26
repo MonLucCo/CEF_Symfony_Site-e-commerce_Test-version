@@ -45,3 +45,4 @@ admin:
     featured_removed: "Produit retiré de la mise en avant."
     featured_limit: "Vous ne pouvez pas mettre plus de 3 produits en avant."
     upload_error: "Erreur lors de l'upload de l'image."
+    order_forbidden: "Les administrateurs ne peuvent pas passer de commande."

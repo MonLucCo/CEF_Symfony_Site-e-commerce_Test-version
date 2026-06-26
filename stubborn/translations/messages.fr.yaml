@@ -113,8 +113,18 @@ cart:
   total: "Total du panier"
   flash:
     added: "Produit ajouté au panier."
+    not_added: "Impossible d'ajouter ce produit au panier."
+    stock_limit: "Maximum atteint pour ce produit dans votre panier."
     removed: "Produit retiré du panier."
+    removed_named: "%product% (taille %size%) a été retiré du panier."
     cleared: "Panier vidé."
+    quantity_zero: "La quantité est déjà à zéro."
+    product_not_found: "Ce produit est introuvable."
+    product_not_in_cart: "Ce produit n'est pas dans votre panier."
+    size_not_in_cart: "Cette taille n'est pas présente dans votre panier."
+    size_not_available: "Cette taille n'est pas disponible pour ce produit."
+    decreased: "Quantité diminuée. Il reste %quantity% exemplaire(s) dans votre panier."
+    internal_error: "Une erreur interne est survenue. Veuillez réessayer plus tard."
   actions:
     name: "Actions"
     remove: "Retirer"
@@ -193,7 +203,6 @@ order:
     back_home: "← Retour à l'accueil"
   flash:
     empty_quantities: "La quantité d'article est insuffisante, pas de commande."
-    admin_forbidden: "Les administrateurs ne peuvent pas passer de commande."
     login_required: "Vous devez être connecté pour passer commande."
     user_not_verified: "Votre adresse email n'est pas vérifiée. Veuillez vérifier votre adresse email pour passer commande."
     success_order: "Votre commande a été confirmée. Un email récapitulatif vous a été envoyé."

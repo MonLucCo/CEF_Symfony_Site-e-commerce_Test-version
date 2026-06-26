@@ -3,7 +3,7 @@
 Etablissement d'un site de e-commerce (avec système de réservation / d'achat en ligne) avec Symfony selon les spécifications du CEF.
 
 ![Licence MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Milestone Phase 2](https://img.shields.io/badge/Phase%202-Développement-green)
+![Milestone Phase 3](https://img.shields.io/badge/Phase%203-Tests-green)
 ![Issues ouvertes](https://img.shields.io/github/issues/MonLucCo/CEF_Symfony_Site-e-commerce_Test-version)
 ![Statut du dépôt](https://img.shields.io/badge/Status%20dépôt-en%20développement-orange)
 
@@ -63,7 +63,7 @@ STRIPE_PUBLIC_KEY=pk_test_xxx
 - [x] Panier en session  
 - [x] Paiement Stripe (Checkout)  
 - [x] Back‑office (CRUD produits)  
-- [ ] Tests unitaires (panier + achat)  
+- [x] Tests unitaires (panier + achat)  
 
 ---
 
@@ -71,9 +71,9 @@ STRIPE_PUBLIC_KEY=pk_test_xxx
 
 Les tests PHPUnit couvrent :
 
-- [ ] Ajout / suppression d’articles dans le panier  
-- [ ] Calcul du total  
-- [ ] Simulation d’un achat Stripe (mock)  
+- [x] Ajout / suppression d’articles dans le panier  
+- [x] Calcul du total  
+- [x] Simulation d’un achat Stripe (mock)  
 
 ---
 

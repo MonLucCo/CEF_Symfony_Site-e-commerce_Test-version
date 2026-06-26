@@ -33,6 +33,15 @@ class StripeService
      */
     public function createCheckoutSession(array $lineCartItems): Session
     {
+        // Stripe pour les tests (utilisation d'une session Stripe sans API)
+        if ($_ENV['APP_ENV'] === 'test') {
+            return Session::constructFrom([
+                'id' => 'cs_test_fake',
+                'url' => 'https://checkout.stripe.com/test-session',
+            ]);
+        }
+
+        // Stripe pour de développement et la production (Checkout Stripe)
         $lineStripeItems = $this->getStripeLineItems($lineCartItems);
 
         if (empty($lineStripeItems)) {
