@@ -3,13 +3,14 @@
 Etablissement d'un site de e-commerce (avec système de réservation / d'achat en ligne) avec Symfony selon les spécifications du CEF.
 
 ![Licence MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Milestone Phase 3](https://img.shields.io/badge/Phase%203-Tests-green)
+![Milestone Phase 4](https://img.shields.io/badge/Phase%204-Documentation-green)
 ![Issues ouvertes](https://img.shields.io/github/issues/MonLucCo/CEF_Symfony_Site-e-commerce_Test-version)
 ![Statut du dépôt](https://img.shields.io/badge/Status%20dépôt-en%20développement-orange)
 
 > 🔗 [Accès aux phases](https://github.com/MonLucCo/CEF_Symfony_Site-e-commerce_Test-version/milestones/)
 > 🔗 [Accès aux issues](https://github.com/MonLucCo/CEF_Symfony_Site-e-commerce_Test-version/issues/)
 > 🔗 [Accès au Kanban](https://github.com/users/MonLucCo/projects/12/views/1)
+> 🔗 [Accès au document du projet - PDF](./stubborn/docs/documentation-projet.pdf)
 ---
 
 ## 🛍️ Stubborn — Boutique en ligne (Symfony)
@@ -79,7 +80,7 @@ Les tests PHPUnit couvrent :
 
 ## 📄 Documentation
 
-- [ ] Documentation complète du projet est fournie au format **PDF** dans le livrable final.
+- [x] Documentation complète du projet est fournie au format **PDF** dans le livrable final.
 
 ---
 
