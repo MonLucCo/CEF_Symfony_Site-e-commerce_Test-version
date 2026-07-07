@@ -118,7 +118,7 @@
         ],
         "services:start": [
             "sudo service mysql start",
-            "./mailpit-linux-amd64 --smtp 1025 --ui 8025 &",
+            "mailpit &",
             "php bin/console messenger:consume async -vv &",
             "symfony serve -d",
             "symfony server:status"
