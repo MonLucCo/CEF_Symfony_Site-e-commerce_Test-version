@@ -3,7 +3,6 @@
 Etablissement d'un site de e-commerce (avec système de réservation / d'achat en ligne) avec Symfony selon les spécifications du **Centre Européen de Formation** (CEF).
 
 ![Licence MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Milestone Phase 4](https://img.shields.io/badge/Phase%204-Documentation-green)
 ![Statut du dépôt](https://img.shields.io/badge/Status-finalis%C3%A9-blue)
 
 > 🔗 [Accès au document du projet - PDF](./stubborn/docs/documentation-projet.pdf)
